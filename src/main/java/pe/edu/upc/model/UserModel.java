@@ -21,7 +21,7 @@ public class UserModel implements Serializable {
 	@Column(name="username", nullable=false, length=25, unique = true)
 	private String username;
 	
-	@Column(name="password", length=25, nullable=false)
+	@Column(name="password", nullable=false)
 	private String password;
 	
 	@Column(name="enabled", nullable=false)
