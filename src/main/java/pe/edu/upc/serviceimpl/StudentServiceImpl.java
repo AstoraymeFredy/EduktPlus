@@ -1,7 +1,11 @@
 package pe.edu.upc.serviceimpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.upc.model.Student;
 import pe.edu.upc.repository.iStudentRepository;
@@ -12,6 +16,26 @@ public class StudentServiceImpl implements iStudentService {
 	
 	@Autowired
 	private iStudentRepository dStudent;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+
+	@Override
+	@Transactional
+	public boolean createStudent(Student student) {
+		student.getUser().setPassword(passwordEncoder.encode(student.getUser().getPassword()));
+		Student objStudent = dStudent.save(student);
+		if(objStudent==null) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	@Override
+	public Student findById(int idStudent) {
+		return dStudent.findById(idStudent).get();
+	}
 
 	@Override
 	public Student findByUserId(int idUser) {
@@ -19,8 +43,15 @@ public class StudentServiceImpl implements iStudentService {
 	}
 
 	@Override
-	public Student findById(int idStudent) {
-		return dStudent.findById(idStudent).get();
+	@Transactional(readOnly = true)
+	public List<Student> listStudent() {
+		return dStudent.findAll();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Student> searchStudent(String nameStudent) {
+		return dStudent.searchByName(nameStudent);
 	}
 
 }
