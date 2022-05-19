@@ -35,7 +35,7 @@ public class Registration implements Serializable {
 	@NotNull(message = "Seleccione estudiante")
 	@ManyToOne
 	@JoinColumn(name="id_student", nullable=false)
-	private Estudent student;
+	private Student student;
 	
 	@NotNull(message = "Ingrese la fecha")
 	@Temporal(TemporalType.DATE)

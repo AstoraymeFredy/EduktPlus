@@ -24,7 +24,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="Estudiante")
-public class Estudent implements Serializable {
+public class Student implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -64,12 +64,12 @@ public class Estudent implements Serializable {
 	@JoinColumn(name="id_usuario", nullable=false)
 	private UserModel user;
 
-	public Estudent() {
+	public Student() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Estudent(int id_student,
+	public Student(int id_student,
 			@NotEmpty(message = "Ingrese su nombre") @Pattern(regexp = "[^0-9]*", message = "El nombre no debe contener números") String name,
 			@NotEmpty(message = "Ingrese su apellido") @Pattern(regexp = "[^0-9]*", message = "El nombre no debe contener números") String lastname,
 			@Email(message = "El correo no es válido", regexp = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])") @NotEmpty(message = "Ingrese su correo") String email,
