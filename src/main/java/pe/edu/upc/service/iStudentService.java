@@ -10,4 +10,6 @@ public interface iStudentService {
 	public Student findByUserId(int idUser);
 	public List<Student> listStudent();
 	public List<Student> searchStudent(String nameStudent);
+	public List<Student> searchStudentLastname(String nameStudent);
+	public void deleteStudent(int idStudent);
 }

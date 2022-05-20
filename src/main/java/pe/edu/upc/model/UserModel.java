@@ -23,20 +23,16 @@ public class UserModel implements Serializable {
 	
 	@Column(name="password", nullable=false)
 	private String password;
-	
-	@Column(name="enabled", nullable=false)
-	private Boolean enabled;
 
 	public UserModel() {
 		super();
 	}
 
-	public UserModel(int id_user, String username, String password, Boolean enabled) {
+	public UserModel(int id_user, String username, String password) {
 		super();
 		this.id_user = id_user;
 		this.username = username;
 		this.password = password;
-		this.enabled = enabled;
 	}
 
 	public int getId_user() {
@@ -62,16 +58,6 @@ public class UserModel implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	public Boolean getEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
-	}
-	
-	
 	
 	
 }

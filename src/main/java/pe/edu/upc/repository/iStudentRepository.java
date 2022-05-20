@@ -12,8 +12,11 @@ import pe.edu.upc.model.Student;
 @Repository
 public interface iStudentRepository extends JpaRepository<Student, Integer> {
 	
-	@Query("from Student c where c.name like %:nameStudent%")
+	@Query("from Student c where lower(c.name) like %:nameStudent%")
 	List<Student> searchByName(@Param("nameStudent") String nameStudent);
+	
+	@Query("from Student c where lower(c.lastname) like %:nameStudent%")
+	List<Student> searchByLastName(@Param("nameStudent") String nameStudent);
 	
 	@Query("from Admin c where c.user.id_user=:idUser")
 	Student findByUserId(int idUser);

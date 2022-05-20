@@ -34,7 +34,7 @@ public class JpaUserDetailsService implements UserDetailsService {
 			role = role + "Estudiante";
 		}
 		authorities.add(new SimpleGrantedAuthority(role));
-		return new CustomUser(user.getUsername(), user.getPassword(), user.getEnabled(), true, true, true, authorities, user.getId_user());
+		return new CustomUser(user.getUsername(), user.getPassword(), true, true, true, true, authorities, user.getId_user());
 	}
 	
 }

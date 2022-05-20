@@ -34,7 +34,8 @@ public class StudentServiceImpl implements iStudentService {
 
 	@Override
 	public Student findById(int idStudent) {
-		return dStudent.findById(idStudent).get();
+		Student student = dStudent.findById(idStudent).get();
+		return student;
 	}
 
 	@Override
@@ -51,7 +52,17 @@ public class StudentServiceImpl implements iStudentService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Student> searchStudent(String nameStudent) {
-		return dStudent.searchByName(nameStudent);
+		return dStudent.searchByName(nameStudent.toLowerCase());
+	}
+
+	@Override
+	public void deleteStudent(int idStudent) {
+		dStudent.deleteById(idStudent);
+	}
+
+	@Override
+	public List<Student> searchStudentLastname(String nameStudent) {
+		return dStudent.searchByLastName(nameStudent.toLowerCase());
 	}
 
 }
