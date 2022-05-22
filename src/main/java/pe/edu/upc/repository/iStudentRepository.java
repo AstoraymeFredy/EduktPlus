@@ -18,6 +18,6 @@ public interface iStudentRepository extends JpaRepository<Student, Integer> {
 	@Query("from Student c where lower(c.lastname) like %:nameStudent%")
 	List<Student> searchByLastName(@Param("nameStudent") String nameStudent);
 	
-	@Query("from Admin c where c.user.id_user=:idUser")
+	@Query("from Student c where c.user.id_user=:idUser")
 	Student findByUserId(int idUser);
 }
