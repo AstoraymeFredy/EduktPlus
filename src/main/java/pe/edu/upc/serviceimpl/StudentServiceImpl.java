@@ -65,4 +65,14 @@ public class StudentServiceImpl implements iStudentService {
 		return dStudent.searchByLastName(nameStudent.toLowerCase());
 	}
 
+	@Override
+	@Transactional
+	public boolean updateStudent(Student student) {
+		Student objStudent = dStudent.save(student);
+		if(objStudent==null) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 }

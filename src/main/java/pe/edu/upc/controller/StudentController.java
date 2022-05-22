@@ -3,6 +3,7 @@ package pe.edu.upc.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,16 @@ import com.sun.el.parser.ParseException;
 
 import pe.edu.upc.service.iStudentService;
 import pe.edu.upc.service.iUserService;
+import pe.edu.upc.utils.Session;
 import pe.edu.upc.model.Student;
 import pe.edu.upc.model.UserModel;
 
 @Controller
 @RequestMapping("/student")
 public class StudentController {
+	
+	@Autowired
+	private Session sesion;
 	
 	@Autowired
 	private iStudentService sService;
@@ -123,5 +128,33 @@ public class StudentController {
 		}
 	}
 	
+	
+	@RequestMapping("/view")
+	public String goPageView(Model model) {
+		model.addAttribute("student",sesion.getStudent());
+		return "perfilStudent/view";
+	}
 
+	@RequestMapping("/edit")
+	public String goPageEdit(Model model) {
+		model.addAttribute("student",sesion.getStudent());
+		return "perfilStudent/update";
+	}
+	
+	@RequestMapping("/editStudent")
+	public String editClient(@Valid @ModelAttribute(value = "student") Student objStudent, BindingResult binRes,
+			Model model, HttpSession httpSession) throws ParseException {
+		if (binRes.hasErrors()) {
+			return "perfilStudent/update";
+		} else {
+			boolean flag = sService.updateStudent(objStudent);
+			if (flag) {
+				httpSession.setAttribute("nameUser", objStudent.getName() + " " + objStudent.getLastname());
+				sesion.setStudent(objStudent);
+				return "redirect:/student/view";
+			} else {
+				return "redirect:/student/edit";
+			}
+		}
+	}
 }
