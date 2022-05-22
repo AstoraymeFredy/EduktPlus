@@ -35,11 +35,11 @@
 								<div
 									class="pb-3 mb-4 d-flex align-items-center justify-content-between">
 									<div>
-										<h3 class="mb-0 fw-bold text-white">Reservas</h3>
+										<h3 class="mb-0 fw-bold text-white">Mis cursos</h3>
 									</div>
 									<div>
-										<a th:href="@{/reservation/goRegister}" type="button"
-											class="btn btn-light"> Reservar </a>
+										<a th:href="@{/registration/goRegister}" type="button"
+											class="btn btn-light"> Matricularme </a>
 									</div>
 								</div>
 							</div>
@@ -50,7 +50,7 @@
 							<!-- card -->					
 							<div class="card rounded-3 shadow-sm border-0">
 								<div class="card-header bg-white border-bottom-0 py-3">
-									<h6 class="mb-0">Listado de reservas</h6>
+									<h6 class="mb-0">Mis cursos</h6>
 								</div>
 								<!-- card body -->
 								<div class="table-responsive">
@@ -58,31 +58,21 @@
 										<thead class="table-light">
 											<tr>
 												<th>#</th>
-												<th>Fecha</th>
-												<th>Direccion</th>
-												<th>Distrito</th>
-												<th>Encargada</th>
-												<th>Precio</th>
+												<th>Curso</th>
+												<th>Docente</th>
 												<th>Acciones</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr th:each="res: ${listReservations}">
-												<td class="align-middle" th:text="${res.id_reservation}"></td>
-												<td class="align-middle"
-													th:text="${#dates.format(res.date,'dd/MM/yyyy')}"></td>
-												<td class="align-middle" th:text="${res.property.address}"></td>
-												<td class="align-middle"
-													th:text="${res.property.district.name}"></td>
-												<td class="align-middle" th:text="${res.cleaningStaff.name}"></td>
-												<td class="align-middle" th:text="${res.price}"></td>
-												<td class="align-middle"><a title="Ver"
-													class="btn btn-primary rounded-circle"
-													th:href="@{'/reservation/view/'}+${res.id_reservation}"><i
-														class="bi bi-eye-fill"> </i></a> <a title="Calificar"
-													class="btn btn-success rounded-circle me-2"
-													th:href="@{'/valoration/register/'}+${res.id_reservation}"><i
-														class="bi bi-pencil-square"></i></a></td>
+											<tr th:each="i: ${listInscription}">
+												<td class="align-middle" th:text="${i.id_registration}"></td>
+										
+										
+										<td class="align-middle">
+											       <a title="Eliminar"
+													class="btn btn-danger rounded-circle me-2"
+													th:href="@{'/registration/delete?id='}+${i.id_registration}"><i
+														class="bi bi-trash"></i></a></td>
 											</tr>
 										</tbody>
 									</table>

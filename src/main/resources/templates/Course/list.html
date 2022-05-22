@@ -33,24 +33,23 @@
 							<!-- Page header -->
 							<div>
 								<div
-									class="pb-3 mb-4 d-flex align-items-center justify-content-between">
+									class="border-bottom pb-4 mb-4 d-flex align-items-center justify-content-between">
 									<div>
-										<h3 class="mb-0 fw-bold text-white">Mis cursos</h3>
+										<h3 class="mb-0 fw-bold text-primary">Seleccionar curso</h3>
 									</div>
-									<div>
-										<a th:href="@{/registration/goRegister}" type="button"
-											class="btn btn-light"> Matricularme </a>
-									</div>
+									<div></div>
 								</div>
 							</div>
 						</div>
 					</div>
+					
+				
 					<div class="row mb-4">
 						<div class="col-12">
 							<!-- card -->					
 							<div class="card rounded-3 shadow-sm border-0">
 								<div class="card-header bg-white border-bottom-0 py-3">
-									<h6 class="mb-0">Mis cursos</h6>
+									<h6 class="mb-0"></h6>
 								</div>
 								<!-- card body -->
 								<div class="table-responsive">
@@ -59,20 +58,18 @@
 											<tr>
 												<th>#</th>
 												<th>Curso</th>
-												<th>Docente</th>
+												<th>Nombre</th>
+												<th>Precio</th>
 												<th>Acciones</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr th:each="i: ${listInscription}">
-												<td class="align-middle" th:text="${i.id_registration}"></td>
-										
-										
-										<td class="align-middle">
-											       <a title="Eliminar"
-													class="btn btn-danger rounded-circle me-2"
-													th:href="@{'/registration/delete?id='}+${i.id_registration}"><i
-														class="bi bi-trash"></i></a></td>
+											<tr th:each="c: ${listCourse}">
+											<td class="align-middle" th:text="${c.id_course}"></td>
+										    <td class="align-middle" th:text="${c.name}"></td>
+											<td class="align-middle" th:text="${c.description}"></td>
+											<td class="align-middle" th:text="${c.price}"></td>
+											
 											</tr>
 										</tbody>
 									</table>
