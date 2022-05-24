@@ -35,7 +35,7 @@ public class Registration implements Serializable {
 	@NotNull(message = "Seleccione estudiante")
 	@ManyToOne
 	@JoinColumn(name="id_student", nullable=false)
-	private Estudent student;
+	private Student student;
 	
 	@NotNull(message = "Ingrese la fecha")
 	@Temporal(TemporalType.DATE)
@@ -46,4 +46,61 @@ public class Registration implements Serializable {
 	@Column(name="enabled", nullable=false)
 	private Boolean enabled;
 
+	public Registration() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Registration(int id_registration, @NotNull(message = "Seleccione curso") Course course,
+			@NotNull(message = "Seleccione estudiante") Student student,
+			@NotNull(message = "Ingrese la fecha") Date date_register, Boolean enabled) {
+		super();
+		this.id_registration = id_registration;
+		this.course = course;
+		this.student = student;
+		this.date_register = date_register;
+		this.enabled = enabled;
+	}
+
+	public int getId_registration() {
+		return id_registration;
+	}
+
+	public void setId_registration(int id_registration) {
+		this.id_registration = id_registration;
+	}
+
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
+	public Date getDate_register() {
+		return date_register;
+	}
+
+	public void setDate_register(Date date_register) {
+		this.date_register = date_register;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	
 }

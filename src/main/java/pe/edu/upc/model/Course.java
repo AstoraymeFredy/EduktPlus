@@ -28,7 +28,7 @@ public class Course implements Serializable  {
 	private String name;
 	
 	@NotEmpty(message = "Ingrese su descripción")
-	@Column(name="nombre", nullable=false, length=200)
+	@Column(name="descripción", nullable=false, length=200)
 	private String description;
 	
 	@Column(name="precio", nullable=false)

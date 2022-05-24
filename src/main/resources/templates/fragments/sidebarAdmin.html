@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<aside th:fragment="sidebarAdmin" class="sidebar bg-dark">
+		<div class="sidebar-start">
+			<div class="sidebar-head">
+				<a href="#" class="logo-wrapper" title="Home"> <img
+					th:src="@{/img/logo.png}" alt="" height="60" />
+				</a>
+				<div class="sidebar-toggle bg-transparent" type="button">
+					<span class="bi-list fs-5 text-white"></span> <span class="sr-only">Toggle
+						menu</span>
+				</div>
+			</div>
+			<div class="sidebar-body">
+				<ul class="sidebar-body-menu list-unstyled">
+					<li><a class="text-decoration-none"
+						th:href="@{/student/list}"><span
+							class="icon bi bi-person-lines-fill fs-5" aria-hidden="true"></span>Estudiantes</a></li>
+					
+					<li><a class="text-decoration-none"
+						th:href="@{/courses/list}"><span
+							class="icon bi bi-person-lines-fill fs-5" aria-hidden="true"></span>Cursos</a></li>
+					
+					<li><a class="text-decoration-none"
+						th:href="@{/teacher/list}"><span
+							class="icon bi bi-person-lines-fill fs-5" aria-hidden="true"></span>Docentes</a></li>
+					
+					<li><a class="text-decoration-none"
+						th:href="@{/report/view}"><span
+							class="icon bi bi-person-lines-fill fs-5" aria-hidden="true"></span>Reportes</a></li>
+					
+
+
+
+
+
+				</ul>
+			</div>
+		</div>
+	</aside>
+</body>
+</html>
