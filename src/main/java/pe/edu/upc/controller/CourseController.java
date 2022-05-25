@@ -18,8 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/")
-@SessionAttributes("{course}")
+@RequestMapping("/course")
 public class CourseController {
     @Autowired
     private iCourseService courseService;
