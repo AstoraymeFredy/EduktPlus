@@ -29,4 +29,6 @@ public class CourseServiceImpl implements iCourseService {
 	public List<Course> findByNameContaining(String name)throws Exception{
 		return rCourse.findByNameContaining(name);
 	}
+	
+
 }
