@@ -31,13 +31,13 @@ public class RegistrationController {
 	public String goPageListRegistrations(Map<String, Object> model) {
 		// model.put("listAdmin", aService.listAdmin());
 		model.put("listInscription",rService.listByStudent(sesion.getStudent().getId_student()));
-		return "registration/list";
+		return "registration/listMyCourses";
 	}
 	
 	@RequestMapping("/goRegister")
 	public String goRegister(Map<String, Object> model) {
 		model.put("listCourse",cService.listCourse());
-		return "Course/list";
+		return "registration/listSelectCourse";
 	}
 	
 	@RequestMapping("/delete")
@@ -51,7 +51,7 @@ public class RegistrationController {
 			model.put("mensaje", "El curso en la matricula no se puede elminar");
 			model.put("listInscription",rService.listByStudent(sesion.getStudent().getId_student()));
 		}
-		return "registration/list";
+		return "registration/listMyCourses";
 	}
 	
 }
