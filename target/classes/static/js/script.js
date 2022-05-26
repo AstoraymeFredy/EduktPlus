@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
       for (_iterator.s(); !(_step = _iterator.n()).done;) {
         var sidebarBtn = _step.value;
 
-        if (sidebarBtn && catSubMenu && sidebarBtn) {
+        if (sidebarBtn && sidebarBtn) {
           sidebarBtn.addEventListener('click', function () {
             var _iterator2 = _createForOfIteratorHelper(sidebarBtns),
                 _step2;
@@ -39,7 +39,9 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             sidebar.classList.toggle('hidden');
-            catSubMenu.classList.remove('visible');
+            if(catSubMenu){
+                catSubMenu.classList.remove('visible');
+            }
           });
         }
       }

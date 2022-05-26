@@ -8,11 +8,10 @@
 <link rel="shortcut icon" href="./img/svg/logo.svg" type="image/x-icon" />
 <!-- Custom styles -->
 <link th:href="@{/css/style.css}" rel="stylesheet" />
-<link th:href="@{/css/main.min.css}" rel="stylesheet"/>
-
+<link th:href="@{/css/main.min.css}" rel="stylesheet" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css" />
-<title>CLEAN EXPERT | LISTADO DE RESERVAS</title>
+<title>CLEAN EXPERT | MIS CURSOS</title>
 </head>
 <body class="bg-light">
 	<div class="page-flex">
@@ -24,7 +23,6 @@
 			<!-- ! Only for table-->
 			<div class="bg-primary mt-0 pb-4 position-absolute"
 				style="height: 180px; width: 100%; z-index: -4"></div>
-
 			<!-- ! Main -->
 			<main class="main position-relative mt-5" id="skip-target">
 				<div class="container ">
@@ -32,10 +30,20 @@
 						<div class="col-lg-12 col-md-12 col-12">
 							<!-- Page header -->
 							<div>
+								<div>
+									<h3 class="mb-0 fw-bold text-white">Mis cursos</h3>
+								</div>
 								<div
-									class="pb-3 mb-4 d-flex align-items-center justify-content-between">
-									<div>
-										<h3 class="mb-0 fw-bold text-white">Mis cursos</h3>
+									class="pb-3 mt-3 mb-3 d-flex align-items-center justify-content-between">
+									<div style="width: 40%">
+										<form class="d-flex">
+											<input id="search" placeholder="Buscar por nombre de curso"
+												type="text" class="form-control" />
+											<button type="submit" class="btn btn-primary">
+												<i class="bi bi-search"></i>
+											</button>
+										</form>
+
 									</div>
 									<div>
 										<a th:href="@{/registration/goRegister}" type="button"
@@ -45,43 +53,29 @@
 							</div>
 						</div>
 					</div>
-					<div class="row mb-4">
-						<div class="col-12">
-							<!-- card -->					
-							<div class="card rounded-3 shadow-sm border-0">
-								<div class="card-header bg-white border-bottom-0 py-3">
-									<h6 class="mb-0">Mis cursos</h6>
-								</div>
-								<!-- card body -->
-								<div class="table-responsive">
-									<table class="table text-nowrap">
-										<thead class="table-light">
-											<tr>
-												<th>#</th>
-												<th>Curso</th>
-												<th>Docente</th>
-												<th>Acciones</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr th:each="i: ${listInscription}">
-												<td class="align-middle" th:text="${i.id_registration}"></td>
-										<!--<td class="align-middle" th:text="${ins.course.name}"></td>
-										<td class="align-middle" th:text="${ins.course.teacher.name}"></td>-->
-										
-										
-										<td class="align-middle">
-											       <a title="Eliminar"
-													class="btn btn-danger rounded-circle me-2"
-													th:href="@{'/registration/delete?id='}+${i.id_registration}"><i
-														class="bi bi-trash"></i></a></td>
-											</tr>
-										</tbody>
-									</table>
+					<div class="row mt-5">
+						<!-- ! Este sería como: <tr th:each="res: ${listStudent}">-->
+						<div class="col-md-6 col-sm-12 mb-4">
+							<div class="card">
+								<div class="card-body px-4 py-4">
+									<div class="row">
+										<div class="col">
+											<h5 class="card-title">Excel Avanzado</h5>
+											<p class="card-text">Docente: Antonio Guerra Paz</p>
+										</div>
+										<div class="col-sm-auto d-flex align-items-center">
+											<a title="Eliminar"
+												class="btn btn-danger rounded-circle me-2"><i
+												class="bi bi-trash"></i></a>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
-
+						<!-- ! Este mensaje muestras si no hay data-->
+						<div>
+							<p class="text-center fs-5">No tienes cursos matriculados</p>
+						</div>
 					</div>
 				</div>
 			</main>
