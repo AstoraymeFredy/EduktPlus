@@ -1,5 +1,6 @@
 package pe.edu.upc.repository;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -18,4 +19,14 @@ public interface iRegistrationRepository extends JpaRepository<Registration, Int
 
 	@Query("from Registration r where r.student.id_student = :idStudent")
 	List<Registration> findByStudentId(@Param("idStudent") int idStudent);
+	
+	@Query(value = "SELECT count(m.id_student), sum(c.precio) as profit "
+			+ "FROM matricula m join curso c on c.id_course = m.id_course" , nativeQuery = true)
+	List<String[]> findHeaderReportNumber();
+	
+	@Query(value =  "SELECT count(m.id_student), sum(c.precio) as profit "
+			+ "FROM matricula m join curso c on c.id_course = m.id_course "
+			+ "where m.fecha_registro>=:start_date and m.fecha_registro<=:end_date"  , nativeQuery = true)
+	List<String[]> findHeaderReportNumber(@Param("start_date") Date start_date,
+			@Param("end_date") Date end_date);
 }

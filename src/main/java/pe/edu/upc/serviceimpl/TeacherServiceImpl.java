@@ -22,4 +22,6 @@ public class TeacherServiceImpl implements iTeacherService {
     public List<Teacher> findByNameContaining(String name)throws Exception{
         return rTeacher.findByNameContaining(name);
     }
+    
+
 }

@@ -38,16 +38,16 @@
 								<div
 									class="pb-3 mt-3 mb-3 d-flex align-items-center justify-content-between">
 									<div >
-										<form method="post" class="d-flex align-bottom">
+										<form  th:action="@{/report/viewByDates}" method="post" th:object="${reportSearch}" class="d-flex align-bottom">
 											<div class="form-group sm-4">
-										    	<label for="from" class="text-white">Desde:*</label>
-										    	<input type="date" class="form-control" id="from"></input>
+										    	<label for="start_date" class="text-white">Desde:*</label>
+										    	<input th:field="*{start_date}" type="date" class="form-control" id="start_date"></p>
 										  	</div>
 										  	<div class="form-group sm-4 ms-2">
-										    	<label for="to" class="text-white">Hasta:*</label>
-										    	<input type="date" class="form-control" id="to"></input>
+										    	<label for="end_date" class="text-white">Hasta:*</label>
+										    	<input th:field="*{end_date}" type="date" class="form-control" id="end_date"></p>
 										  	</div>
-										  	<div class="form-group sm-4 ms-2 d-flex align-items-end">
+										  	<div class="form-group sm-4 ms-2 d-flex align-items-center">
 											  	<button type="submit" class="btn btn-light">Filtrar</button>
 										  	</div>
 										</form>
@@ -61,7 +61,7 @@
 					    <div class="card" style="min-height: 110px;">
 					      <div class="card-body">
 					        <h5 class="card-title text-danger text-center fs-6">Número total de estudiantes</h5>
-					        <p class="card-text fs-2 text-center">750</p>
+					        <p class="card-text fs-2 text-center" th:text="${headerNumber[0][0]}"></p>
 					      </div>
 					    </div>
 					  </div>
@@ -69,7 +69,7 @@
 					    <div class="card" style="min-height: 110px;">
 					      <div class="card-body">
 					        <h5 class="card-title text-danger text-center fs-6">Total recaudado</h5>
-					        <p class="card-text fs-2 text-center">S/. 800</p>
+					        <p class="card-text fs-2 text-center" th:if= "${headerNumber[0][1] != null}" th:text="'S/. ' +  ${headerNumber[0][1]}"></p>
 					      </div>
 					    </div>
 					  </div>
@@ -77,7 +77,7 @@
 					    <div class="card" style="min-height: 110px;">
 					      <div class="card-body">
 					        <h5 class="card-title text-danger text-center fs-6">Docente con más estudiantes</h5>
-					        <p class="card-text fs-3 text-center">Juan Perez</p>
+					        <p class="card-text fs-3 text-center" th:if="${not #lists.isEmpty(headerTeacher)}" th:text="${headerTeacher[0][0]} +  ${headerTeacher[0][1]}"></p>
 					      </div>
 					    </div>
 					  </div>
@@ -85,7 +85,7 @@
 					    <div class="card" style="min-height: 110px;">
 					      <div class="card-body">
 					        <h5 class="card-title text-danger text-center fs-6">Curso con más estudiante</h5>
-					        <p class="card-text fs-3 text-center">Excel avanzado</p>
+					        <p class="card-text fs-3 text-center" th:if="${not #lists.isEmpty(headerCourse)}" th:text="${headerCourse[0][0]}"></p>
 					      </div>
 					    </div>
 					  </div>
@@ -95,7 +95,7 @@
 							<!-- card -->					
 							<div class="card rounded-3 shadow-sm border-0">
 								<div class="card-header bg-white border-bottom-0 py-3">
-									<h6 class="mb-0">Listado de estudiantes</h6>
+									<h6 class="mb-0"></h6>
 								</div>
 								<!-- card body -->
 								<div class="table-responsive">
@@ -109,11 +109,11 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td class="align-middle">1</td>
-												<td class="align-middle">SQL Server</td>
-												<td class="align-middle">N° estudiantes</td>
-												<td class="align-middle">Recaudación</td>
+											<tr th:each="course, i: ${listCourseReport}">
+												<td class="align-middle" th:text="${i.index+1}"></td>
+												<td class="align-middle" th:text="${course[0]}"></td>
+												<td class="align-middle" th:text="${course[1]}"></td>
+												<td class="align-middle" th:text="'S/. ' + ${course[2]}"></td>
 											</tr>
 										</tbody>
 									</table>
