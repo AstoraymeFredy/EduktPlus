@@ -63,9 +63,7 @@ public class Teacher implements Serializable {
 	@Column(name="fecha")
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date birth_date;
-	
-	@Column(name="enabled", nullable=false)
-	private Boolean enabled;
+
 
 	public Teacher() {
 		super();
@@ -78,8 +76,8 @@ public class Teacher implements Serializable {
 			@Size(min = 8, max = 8, message = "El DNI debe tener 8 dígitos") @Pattern(regexp = "[0-9]+", message = "El DNI debe contener solo números") @NotEmpty(message = "Ingrese su DNI") String dni,
 			@Size(min = 9, max = 9, message = "El celular de tener 9 digitos") @Pattern(regexp = "[0-9]+", message = "El celular debe contener solo números") @NotEmpty(message = "Ingrese su celular") String phone,
 			@Email(message = "El correo no es válido", regexp = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])") @NotEmpty(message = "Ingrese su correo") String email,
-			@NotNull(message = "Ingrese la fecha") @Past(message = "La fecha debe estar en el pasado") Date birth_date,
-			Boolean enabled) {
+			@NotNull(message = "Ingrese la fecha") @Past(message = "La fecha debe estar en el pasado") Date birth_date
+			) {
 		super();
 		this.id_teacher = id_teacher;
 		this.name = name;
@@ -88,7 +86,6 @@ public class Teacher implements Serializable {
 		this.phone = phone;
 		this.email = email;
 		this.birth_date = birth_date;
-		this.enabled = enabled;
 	}
 
 	public int getId_teacher() {
@@ -147,14 +144,5 @@ public class Teacher implements Serializable {
 		this.birth_date = birth_date;
 	}
 
-	public Boolean getEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
-	}
-	
-	
 
 }

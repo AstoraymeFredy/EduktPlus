@@ -1,4 +1,4 @@
-package pe.edu.upc.repository;
+package pe.edu.upc.controller.repository;
 
 import java.util.List;
 

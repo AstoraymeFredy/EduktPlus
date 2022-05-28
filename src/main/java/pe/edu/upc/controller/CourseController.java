@@ -10,11 +10,12 @@ import pe.edu.upc.model.Teacher;
 import pe.edu.upc.service.iCourseService;
 import pe.edu.upc.service.iTeacherService;
 import pe.edu.upc.utils.CourseSearch;
-import pe.edu.upc.utils.TeacherSearch;
 
 import javax.validation.Valid;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -26,18 +27,18 @@ public class CourseController {
     @Autowired
     private iTeacherService teacherService;
 
-    @GetMapping
-    public String list(Model model) {
+    @RequestMapping("/list")
+    public String listCourses(Map<String, Object> model) {
         try {
-            List<Course> courses = courseService.getAll();
-            model.addAttribute("courses", courses);
+            model.put("listCourse", courseService.listCourse());
+            model.put("course", new Course());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return ""; /** pantalla de cursos-administrador**/
+        return "course/list";
     }
 
-    @GetMapping("new")
+    @GetMapping("/register")
     public String newCourse(Model model) {
         try {
             List<Teacher> teachers = teacherService.getAll();
@@ -46,7 +47,7 @@ public class CourseController {
         } catch (Exception e) {
             // TODO: handle exception
         }
-        return ""; /** pantalla de registro de curso**/
+        return "course/register";
     }
 
     @PostMapping("saveNew")
@@ -61,24 +62,24 @@ public class CourseController {
         } catch (Exception e) {
             // TODO: handle exception
         }
-        return ""; /** pantalla de cursos-administrador**/
+        return "redirect:/course/list";
     }
 
-    @GetMapping("{id}/edit")
+    @GetMapping("/edit/{id}")
     public String edit(Model model, @PathVariable("id") Integer id) {
         try {
             if(courseService.existsById(id)) {
                 Optional<Course> optional = courseService.findById(id);
                 List<Teacher> teachers = teacherService.getAll();
-                model.addAttribute("teacher", optional.get());
+                model.addAttribute("teachers", teachers);
                 model.addAttribute("course", optional.get());
             } else {
-                return ""; /** pantalla de lista de cursos**/
+                return "redirect:/course/list";
             }
         } catch (Exception e) {
         }
 
-        return ""; /** pantalla de edicion de curso**/
+        return "course/update";
     }
 
     @PostMapping("saveedit")
@@ -89,10 +90,10 @@ public class CourseController {
         } catch (Exception e) {
 
         }
-        return ""; /** pantalla de cursos-administrador**/
+        return "redirect:/course/list";
     }
 
-    @GetMapping("{id}/del")
+    @GetMapping("/del/{id}")
     public String delete (Model model,@PathVariable("id") Integer id) {
         try {
             if(courseService.existsById(id)) {
@@ -101,21 +102,21 @@ public class CourseController {
 
         }catch(	Exception e) {}
 
-        return ""; /** pantalla de cursos-administrador**/
+        return "course/list";
     }
 
-    @PostMapping("busqueda")
-    public String searchCourses(Model model, @ModelAttribute("courseSearch") CourseSearch courseSearch) {
+    @RequestMapping("/search")
+    public String buscar(Map<String, Object> model, @ModelAttribute Course course)
+            throws ParseException
+    {
+        List<Course> listCourse;
+        listCourse = courseService.searchCourse(course.getName());
 
-        List<Course> courses = new ArrayList<>();
+        if (listCourse.isEmpty()) {
+            model.put("mensaje", "No existen coincidencias");
+        }
 
-        try {
-            courses = courseService.findByNameContaining(courseSearch.getName());
-        } catch (Exception e) { }
-
-        model.addAttribute("courseSearch", courseSearch);
-        model.addAttribute("courses", courses);
-
-        return "searchs/"; /**pantalla actualizada de busqueda**/
+        model.put("listCourse", listCourse);
+        return  "course/list";
     }
 }

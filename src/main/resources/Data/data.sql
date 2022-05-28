@@ -4,3 +4,4 @@ INSERT INTO usuario (password,username) VALUES ('$2a$10$2Vm9AnyFTfnukmkpN5whgu1A
 
 INSERT INTO administrador (apellidos, nombre, id_usuario) VALUES ('Belez', 'Humberto', 1);
 INSERT INTO estudiante ( fecha, dni, email, apellidos, nombre, id_usuario) VALUES ('2000-08-20', '12345678', 'pablo.marmol@gmail.com', 'Marmol', 'Pablo', 2);
+--select * from administrador
