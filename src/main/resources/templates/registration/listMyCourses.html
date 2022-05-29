@@ -36,10 +36,10 @@
 								<div
 									class="pb-3 mt-3 mb-3 d-flex align-items-center justify-content-between">
 									<div style="width: 40%">
-										<form class="d-flex">
+										<form class="d-flex"  th:action="@{/course/buscarinscritos}" th:object="${course}">
 											<input id="search" placeholder="Buscar por nombre de curso"
-												type="text" class="form-control" />
-											<button type="submit" class="btn btn-primary">
+												 th:field="*{name}" type="text" class="form-control" />
+											<button type="submit" class="btn btn-primary" >
 												<i class="bi bi-search"></i>
 											</button>
 										</form>
@@ -54,18 +54,22 @@
 						</div>
 					</div>
 					<div class="row mt-5">
-						<!-- ! Este sería como: <tr th:each="res: ${listStudent}">-->
-						<div class="col-md-6 col-sm-12 mb-4">
+
+						<div class="col-md-6 col-sm-12 mb-4"
+							th:each="i: ${listInscription}">
+
 							<div class="card">
 								<div class="card-body px-4 py-4">
 									<div class="row">
 										<div class="col">
-											<h5 class="card-title">Excel Avanzado</h5>
-											<p class="card-text">Docente: Antonio Guerra Paz</p>
+											<h5 class="card-title" th:text="${i.course.name}"></h5>
+											<p class="card-text"
+												th:text="Docente+': ' + ${i.course.teacher.name}"></p>
 										</div>
 										<div class="col-sm-auto d-flex align-items-center">
 											<a title="Eliminar"
-												class="btn btn-danger rounded-circle me-2"><i
+												class="btn btn-danger rounded-circle me-2"
+												th:href="@{'/registration/delete?id='}+${i.id_registration}"><i
 												class="bi bi-trash"></i></a>
 										</div>
 									</div>
@@ -73,9 +77,9 @@
 							</div>
 						</div>
 						<!-- ! Este mensaje muestras si no hay data-->
-						<div>
-							<p class="text-center fs-5">No tienes cursos matriculados</p>
-						</div>
+							<div th:if="${vacio ==1}">
+								<p class="text-center fs-5">No tienes cursos matriculados</p>
+							</div>
 					</div>
 				</div>
 			</main>
