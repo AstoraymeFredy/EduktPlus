@@ -5,6 +5,9 @@ INSERT INTO usuario (password,username) VALUES ('$2a$10$2Vm9AnyFTfnukmkpN5whgu1A
 
 INSERT INTO administrador (apellidos, nombre, id_usuario) VALUES ('Belez', 'Humberto', 1);
 INSERT INTO estudiante ( fecha, dni, email, apellidos, nombre, id_usuario) VALUES ('2000-08-20', '12345678', 'pablo.marmol@gmail.com', 'Marmol', 'Pablo', 2);
+
+INSERT INTO administrador (apellidos, nombre, id_usuario) VALUES ('Belez', 'Humberto', 1);
+INSERT INTO estudiante ( fecha, dni, email, apellidos, nombre, id_usuario) VALUES ('2000-08-20', '12345678', 'pablo.marmol@gmail.com', 'Marmol', 'Pablo', 2);
 INSERT INTO estudiante ( fecha, dni, email, apellidos, nombre, id_usuario) VALUES ('2000-08-21', '87564123', 'luisa.gallego@gmail.com', 'Gallego Basteri', 'Luisa', 2);
 INSERT INTO estudiante ( fecha, dni, email, apellidos, nombre, id_usuario) VALUES ('2000-08-23', '87564123', 'terry.kang@gmail.com', 'Kang Luca', 'Terry', 2);
 
@@ -23,4 +26,5 @@ INSERT INTO matricula ( fecha_registro, enabled, id_course, id_student) VALUES (
 INSERT INTO matricula ( fecha_registro, enabled, id_course, id_student) VALUES ('2022-03-20',true, 2, 1);
 INSERT INTO matricula ( fecha_registro, enabled, id_course, id_student) VALUES ('2022-03-20',true, 2, 2);
 INSERT INTO matricula ( fecha_registro, enabled, id_course, id_student) VALUES ('2022-03-20',true, 2, 3);
+
 

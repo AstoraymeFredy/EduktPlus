@@ -1,5 +1,6 @@
 package pe.edu.upc.controller;
 
+import com.sun.el.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,39 +8,39 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.model.Teacher;
 import pe.edu.upc.service.iTeacherService;
-import pe.edu.upc.utils.TeacherSearch;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
 @Controller
-@RequestMapping("/teachers")
+@RequestMapping("/teacher")
 public class TeacherController {
 
     @Autowired
     private iTeacherService teacherService;
 
-    @GetMapping
-    public String list(Model model) {
+
+    @RequestMapping("/list")
+    public String listTeachers(Map<String, Object> model) {
         try {
-            List<Teacher> teachers = teacherService.getAll();
-            model.addAttribute("teachers", teachers);
+            model.put("listTeacher", teacherService.listTeacher());
+            model.put("teacher", new Teacher());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return ""; /** pantalla de docentes-administrador**/
+        return "teacher/list";
     }
 
-    @GetMapping("new")
+    @GetMapping("register")
     public String newTeacher(Model model) {
         try {
             model.addAttribute("teacher", new Teacher());
         } catch (Exception e) {
         }
-        return ""; /** pantalla de registro de docente**/
+        return "teacher/register";
     }
 
     @PostMapping("saveNew")
@@ -54,22 +55,22 @@ public class TeacherController {
         } catch (Exception e) {
 
         }
-        return ""; /** pantalla de docentes-administrador**/
+        return "redirect:/teacher/list";
     }
 
-    @GetMapping("{id}/edit")
-    public String edit(Model model, @PathVariable("id") Integer id) {
+    @GetMapping("/edit/{id}")
+    public String editTeacher(Model model, @PathVariable("id") Integer id) {
         try {
             if(teacherService.existsById(id)) {
                 Optional<Teacher> optional = teacherService.findById(id);
                 model.addAttribute("teacher", optional.get());
             } else {
-                return ""; /** pantalla de lista de docentes**/
+                return "redirect:/teacher/list";
             }
         } catch (Exception e) {
         }
 
-        return ""; /** pantalla de edicion de docentes**/
+        return "teacher/update";
     }
 
     @PostMapping("saveedit")
@@ -80,11 +81,11 @@ public class TeacherController {
         } catch (Exception e) {
 
         }
-        return ""; /** pantalla de docentes-administrador**/
+        return "redirect:/teacher/list";
     }
 
-    @GetMapping("{id}/del")
-    public String delete (Model model,@PathVariable("id") Integer id) {
+    @GetMapping("/del/{id}")
+    public String deleteTeacher (Model model,@PathVariable("id") Integer id) {
         try {
             if(teacherService.existsById(id)) {
                 teacherService.deleteById(id);
@@ -92,24 +93,24 @@ public class TeacherController {
 
         }catch(	Exception e) {}
 
-        return ""; /** pantalla de docentes-administrador**/
+        return "redirect:/teacher/list";
     }
 
-    @PostMapping("busqueda")
-    public String searchTeachers(Model model, @ModelAttribute("teacherSearch") TeacherSearch teacherSearch) {
-
-        List<Teacher> teachers = new ArrayList<>();
-
-        try {
-            teachers = teacherService.findByNameContaining(teacherSearch.getName());
-        } catch (Exception e) {
-            // TODO: handle exception
+    @RequestMapping("/search")
+    public String buscar(Map<String, Object> model, @ModelAttribute Teacher teacher)
+            throws ParseException
+    {
+        List<Teacher> listaTeacher;
+        listaTeacher = teacherService.searchTeacher(teacher.getName());
+        if (listaTeacher.isEmpty()) {
+            listaTeacher = teacherService.searchTeacherLastname(teacher.getName());
         }
 
-        model.addAttribute("teacherSearch", teacherSearch);
-        model.addAttribute("teachers", teachers);
+        if (listaTeacher.isEmpty()) {
+            model.put("mensaje", "No existen coincidencias");
+        }
 
-        return "searchs/"; /**pantalla actualizada de busqueda**/
+        model.put("listTeacher", listaTeacher);
+        return  "teacher/list";
     }
-
 }

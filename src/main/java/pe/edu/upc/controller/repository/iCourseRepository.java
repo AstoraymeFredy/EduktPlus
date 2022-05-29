@@ -1,4 +1,4 @@
-package pe.edu.upc.repository;
+package pe.edu.upc.controller.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -13,9 +13,9 @@ import java.util.List;
 
 @Repository
 public interface iCourseRepository extends JpaRepository<Course, Integer> {
-    List<Course> findByNameContaining(String name);
-    
-    
+	@Query("from Course c where lower(c.name) like %:nameCourse%")
+	List<Course> searchByName(@Param("nameCourse")String nameCourse);
+
 	@Query(value = "SELECT c.nombre, count(m.id_registration), sum(c.precio) as profit "
 			+ "from curso c join matricula m on c.id_course = m.id_course "
 			+ "group by c.nombre " + "order by profit DESC", nativeQuery = true)

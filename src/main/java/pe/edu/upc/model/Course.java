@@ -38,9 +38,7 @@ public class Course implements Serializable  {
 	@ManyToOne
 	@JoinColumn(name="id_teacher", nullable=false)
 	private Teacher teacher;
-	
-	@Column(name="enabled", nullable=false)
-	private Boolean enabled;
+
 
 	public Course() {
 		super();
@@ -49,14 +47,14 @@ public class Course implements Serializable  {
 
 	public Course(int id_course, @NotEmpty(message = "Ingrese su nombre") String name,
 			@NotEmpty(message = "Ingrese su descripción") String description, float price,
-			@NotNull(message = "Seleccione docente a cargo") Teacher teacher, Boolean enabled) {
+			@NotNull(message = "Seleccione docente a cargo") Teacher teacher) {
 		super();
 		this.id_course = id_course;
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.teacher = teacher;
-		this.enabled = enabled;
+
 	}
 
 	public int getId_course() {
@@ -99,13 +97,6 @@ public class Course implements Serializable  {
 		this.teacher = teacher;
 	}
 
-	public Boolean getEnabled() {
-		return enabled;
-	}
 
-	public void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
-	}
-	
 	
 }

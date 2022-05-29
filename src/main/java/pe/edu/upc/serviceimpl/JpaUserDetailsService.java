@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pe.edu.upc.repository.iUserRepository;
+import pe.edu.upc.controller.repository.iUserRepository;
 import pe.edu.upc.model.CustomUser;
 import pe.edu.upc.model.UserModel;
 

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.upc.model.Student;
-import pe.edu.upc.repository.iStudentRepository;
+import pe.edu.upc.controller.repository.iStudentRepository;
 import pe.edu.upc.service.iStudentService;
 
 @Service
