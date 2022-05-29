@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import pe.edu.upc.model.Admin;
 import pe.edu.upc.service.iAdminService;
-import pe.edu.upc.repository.iAdminRepository;
+import pe.edu.upc.controller.repository.iAdminRepository;
 
 @Service
 public class AdminServiceImpl implements iAdminService {

@@ -30,7 +30,7 @@
                             <div
                                     class="border-bottom pb-4 mb-4 d-flex align-items-center justify-content-between">
                                 <div>
-                                    <h3 class="mb-0 fw-bold text-primary">Agregar curso</h3>
+                                    <h3 class="mb-0 fw-bold text-primary">Agregar docente</h3>
                                 </div>
                                 <div></div>
                             </div>
@@ -41,7 +41,7 @@
                     <div class="col-xl-3 col-lg-4 col-md-12 col-12">
                         <div class="mb-4 mb-lg-0">
                             <p class="mb-0 fs-5 text-muted">Complete los campos del
-                                curso</p>
+                                docente</p>
                         </div>
                     </div>
                     <div class="col-xl-9 col-lg-8 col-md-12 col-12">
@@ -51,18 +51,18 @@
                             <div class="card-body">
 
 
-                                <form th:action="@{/course/saveNew}" method="post"
-                                      th:object="${course}">
+                                <form th:action="@{/teacher/saveNew}" method="post"
+                                      th:object="${teacher}">
                                     <!-- row -->
 
                                     <div class="mb-4 row">
                                         <input id="id" placeholder="Dato oculto"
-                                               th:field="*{id_course}" type="hidden" />
+                                               th:field="*{id_teacher}" type="hidden" />
                                         <label for="name"
                                                class="col-sm-4 col-form-label
-	                                            form-label">Nombre:</label>
+	                                            form-label">Nombres*:</label>
                                         <div class="col-md-8 col-12">
-                                            <input id="name" placeholder="Ingrese el nombre del curso"
+                                            <input id="name" placeholder="Ingrese el nombre(s)"
                                                    th:field="*{name}" type="text" class="form-control" /> <small
                                                 class="form-text text-danger"
                                                 th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>
@@ -71,50 +71,74 @@
 
 
                                     <div class="mb-4 row">
-                                        <label for="price"
+                                        <label for="lastname"
                                                class="col-sm-4 col-form-label
-	                                            form-label">Precio:</label>
+	                                            form-label">Apellidos*:</label>
                                         <div class="col-md-8 col-12">
-                                            <input id="price" placeholder="Ingrese un precio"
-                                                   th:field="*{price}" type="text" class="form-control" />
+                                            <input id="lastname" placeholder="Ingrese los apellidos"
+                                                   th:field="*{lastname}" type="text" class="form-control" />
                                             <small class="form-text text-danger"
-                                                   th:if="${#fields.hasErrors('price')}"
-                                                   th:errors="*{price}"></small>
+                                                   th:if="${#fields.hasErrors('lastname')}"
+                                                   th:errors="*{lastname}"></small>
                                         </div>
                                     </div>
 
                                     <div class="mb-4 row">
-                                        <label
+                                        <label for="email"
                                                class="col-sm-4 col-form-label
-	                                            form-label">Docente:</label>
+	                                            form-label">Correo*:</label>
                                         <div class="col-md-8 col-12">
-                                            <select th:field="*{teacher}" class="form-select" aria-label="Default select example">
-                                                <option th:each="teacher : ${teachers}"
-                                                        th:value="${teacher.id_teacher}"
-                                                        th:text="${teacher.name}+' '+${teacher.lastname}" >-</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="mb-4 row">
-                                        <label for="descripcion"
-                                               class="col-sm-4 col-form-label
-	                                            form-label">Descripción:</label>
-                                        <div class="col-md-8 col-12">
-                                            <textarea id="descripcion" placeholder="Ingrese una descripción"
-                                                   th:field="*{description}" type="text" class="form-control" rows="4"></textarea> <small
+                                            <input id="email" placeholder="Ingrese el correo"
+                                                   th:field="*{email}" type="text" class="form-control" /> <small
                                                 class="form-text text-danger"
-                                                th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></small>
+                                                th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
                                         </div>
                                     </div>
 
 
+                                    <div class="mb-4 row">
+                                        <label for="dni"
+                                               class="col-sm-4 col-form-label
+	                                            form-label">DNI:</label>
+                                        <div class="col-md-8 col-12">
+                                            <input id="dni" placeholder="Ingrese el DNI"
+                                                   th:field="*{dni}" type="text" class="form-control" /> <small
+                                                class="form-text text-danger"
+                                                th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></small>
+                                        </div>
+                                    </div>
 
+
+                                    <div class="mb-4 row">
+                                        <label for="birth_date"
+                                               class="col-sm-4 col-form-label
+	                                            form-label">Fecha de nacimiento*</label>
+                                        <div class="col-md-8 col-12">
+                                            <input type="date"
+                                                   placeholder="Ingrese la fecha de nacimiento"
+                                                   class="form-control" th:field="*{birth_date}" id="birth_date"></input>
+                                            <small class="form-text text-danger"
+                                                   th:if="${#fields.hasErrors('birth_date')}"
+                                                   th:errors="*{birth_date}"></small>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4 row">
+                                        <label for="phone"
+                                               class="col-sm-4 col-form-label
+	                                            form-label">Celular:</label>
+                                        <div class="col-md-8 col-12">
+                                            <input id="phone" placeholder="Ingrese el número de celular"
+                                                   th:field="*{phone}" type="text" class="form-control" /> <small
+                                                class="form-text text-danger"
+                                                th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></small>
+                                        </div>
+                                    </div>
 
 
                                     <div class="mt-2">
-                                        <a href="/course/list" class="btn btn-secondary px-4 me-2">Cancelar</a>
+                                        <a href="/teacher/list" class="btn btn-secondary px-4 me-2">Cancelar</a>
                                         <button type="submit" class="btn btn-primary px-4">Guardar</button>
                                     </div>
 

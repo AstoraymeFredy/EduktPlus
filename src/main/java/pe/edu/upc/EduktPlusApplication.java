@@ -17,4 +17,5 @@ public class EduktPlusApplication {
 		SpringApplication.run(EduktPlusApplication.class, args);
 	}
 
+
 }

@@ -1,4 +1,4 @@
-package pe.edu.upc.repository;
+package pe.edu.upc.controller.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,8 +11,14 @@ import java.util.List;
 
 @Repository
 public interface iTeacherRepository extends JpaRepository<Teacher, Integer> {
-    List<Teacher> findByNameContaining(String name);
-    
+
+	@Query("from Teacher t where lower(t.name) like %:nameTeacher%")
+	List<Teacher> searchByName(@Param("nameTeacher")String nameTeacher);
+
+	@Query("from Teacher t where lower(t.lastname) like %:nameTeacher%")
+	List<Teacher> searchByLastName(@Param("nameTeacher") String nameTeacher);
+
+
 	@Query(value = "SELECT d.nombre, d.apellidos, count(m.id_student)  "
 			+ "FROM matricula m join curso c on c.id_course = m.id_course "
 			+ "join docente d on d.id_teacher = d.id_teacher "

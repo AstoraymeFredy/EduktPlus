@@ -1,4 +1,4 @@
-package pe.edu.upc.repository;
+package pe.edu.upc.controller.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

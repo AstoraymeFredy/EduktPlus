@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pe.edu.upc.model.Registration;
-import pe.edu.upc.repository.iCourseRepository;
-import pe.edu.upc.repository.iRegistrationRepository;
-import pe.edu.upc.repository.iTeacherRepository;
+import pe.edu.upc.controller.repository.iCourseRepository;
+import pe.edu.upc.controller.repository.iRegistrationRepository;
+import pe.edu.upc.controller.repository.iTeacherRepository;
 import pe.edu.upc.service.iRegistrationService;
 
 @Service
