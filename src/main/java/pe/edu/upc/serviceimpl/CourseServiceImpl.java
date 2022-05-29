@@ -13,6 +13,7 @@ import pe.edu.upc.controller.repository.iCourseRepository;
 import pe.edu.upc.service.iCourseService;
 
 
+
 @Service
 public class CourseServiceImpl implements iCourseService {
 
@@ -32,7 +33,12 @@ public class CourseServiceImpl implements iCourseService {
 		return rCourse.searchByName(nameCourse.toLowerCase());
 	}
 
+	
 
-
+	@Override
+	@Transactional(readOnly = true)
+	public Course searchById(String idCourse) {
+		return rCourse.searchById(idCourse);
+	}
 
 }

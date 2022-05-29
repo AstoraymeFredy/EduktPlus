@@ -31,12 +31,15 @@
 							</div>
 						</div>
 						<div class="col mb-4">
-							<form method="get" class="d-flex">
+							<form method="get" class="d-flex" th:action="@{/registration/buscarcursos}" th:object="${course}">
 								<input id="search" placeholder="Busca por nombre de curso"
-									type="text" class="form-control" />
+									th:field="*{name}" type="text" class="form-control" />
 								<button type="submit" class="btn btn-primary ms-2">
 									<i class="bi bi-search"></i>
 								</button>
+
+								
+
 							</form>
 						</div>
 					</div>
@@ -73,9 +76,8 @@
 										</div>
 										<div
 											class="col-auto d-flex flex-column justify-content-between">
-											<p class="card-text text-danger fw-bold text-end fs-5 "
-												th:text="'S/.' + ${ #numbers.formatDecimal(c.price,1,2,'POINT')}"></p>
-											<button type="button" class="btn btn-danger">Inscribirse</button>
+											<p class="card-text text-danger fw-bold text-end fs-5 " th:text="'S/.' + ${ #numbers.formatDecimal(c.price,1,2,'POINT')}"></p>
+											<a th:href="@{/registration/registrarmatricula?id=}+${c.id_course}" type="button" class="btn btn-danger">Inscribirse</a>
 										</div>
 									</div>
 								</div>
@@ -84,7 +86,8 @@
 					</div>
 
 					<div class="mt-2">
-						<a th:href="@{/registration/list}" class="btn btn-secondary px-4 me-2">Cancelar</a>
+						<a th:href="@{/registration/list}"
+							class="btn btn-secondary px-4 me-2">Cancelar</a>
 					</div>
 				</div>
 			</main>
