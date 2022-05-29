@@ -5,7 +5,7 @@ INSERT INTO usuario (password,username) VALUES ('$2a$10$2Vm9AnyFTfnukmkpN5whgu1A
 
 
 
-INSERT INTO administrador (apellidos, nombre, id_usuario) VALUES ('Belez', 'Humberto', 1);
+INSERT INTO administrador (apellidos, nombre, id_usuario) VALUES ('Belez', 'Humbertos', 1);
 INSERT INTO estudiante ( fecha, dni, email, apellidos, nombre, id_usuario) VALUES ('2000-08-20', '12345678', 'pablo.marmol@gmail.com', 'Marmol', 'Pablo', 2);
 INSERT INTO estudiante ( fecha, dni, email, apellidos, nombre, id_usuario) VALUES ('2000-08-21', '87564123', 'luisa.gallego@gmail.com', 'Gallego Basteri', 'Luisa', 1);
 INSERT INTO estudiante ( fecha, dni, email, apellidos, nombre, id_usuario) VALUES ('2000-08-23', '87564123', 'terry.kang@gmail.com', 'Kang Luca', 'Terry', 1);
