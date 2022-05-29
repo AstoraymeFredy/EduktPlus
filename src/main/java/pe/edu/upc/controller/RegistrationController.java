@@ -31,6 +31,8 @@ public class RegistrationController {
 	public String goPageListRegistrations(Map<String, Object> model) {
 		// model.put("listAdmin", aService.listAdmin());
 		model.put("listInscription",rService.listByStudent(sesion.getStudent().getId_student()));
+		if(rService.listByStudent(sesion.getStudent().getId_student()).isEmpty()) model.put("vacio",1);
+	
 		return "registration/listMyCourses";
 	}
 	
@@ -45,7 +47,7 @@ public class RegistrationController {
 		try {
 			if (id != null && id > 0) {
 				rService.deleteRegistration(id);
-				model.put("listInscription",rService.listByStudent(sesion.getStudent().getId_student()));
+				return "redirect:/registration/list";
 			}
 		} catch (Exception ex) {
 			model.put("mensaje", "El curso en la matricula no se puede elminar");
