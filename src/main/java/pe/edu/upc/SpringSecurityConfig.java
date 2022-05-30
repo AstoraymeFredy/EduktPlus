@@ -39,7 +39,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	            .antMatchers("/img/**").permitAll()
 	        	.antMatchers("/estudent/**").access("hasRole('ROLE_Administrador')")
 				.antMatchers("/teacher/**").access("hasRole('ROLE_Administrador')")
-				.antMatchers("/course/**").access("hasRole('ROLE_Estudiante')")	
+				.antMatchers("/course/**").access("hasRole('ROLE_Administrador')")
 				.antMatchers("/perfil/**").access("hasRole('ROLE_Estudiante')")	
 				.antMatchers("/reports/**").access("hasRole('ROLE_Administrador')")
 				.antMatchers("/registration/**").access("hasRole('ROLE_Estudiante')")

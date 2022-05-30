@@ -1,6 +1,5 @@
 pe\edu\upc\model\Teacher.class
 pe\edu\upc\MvcConfig.class
-pe\edu\upc\repository\iUserRepository.class
 pe\edu\upc\model\CustomUser.class
 pe\edu\upc\service\iStudentService.class
 pe\edu\upc\serviceimpl\RegistrationServiceImpl.class
@@ -11,23 +10,19 @@ pe\edu\upc\serviceimpl\StudentServiceImpl.class
 pe\edu\upc\service\iCrudService.class
 pe\edu\upc\service\iUserService.class
 pe\edu\upc\utils\test.class
-pe\edu\upc\repository\iStudentRepository.class
 pe\edu\upc\controller\TeacherController.class
 pe\edu\upc\SpringSecurityConfig.class
 pe\edu\upc\serviceimpl\AdminServiceImpl.class
 pe\edu\upc\model\Registration.class
 pe\edu\upc\service\iAdminService.class
-pe\edu\upc\repository\iTeacherRepository.class
 pe\edu\upc\service\iRegistrationService.class
 pe\edu\upc\controller\StudentController.class
 pe\edu\upc\EduktPlusApplication.class
 pe\edu\upc\model\Student.class
 pe\edu\upc\model\UserModel.class
-pe\edu\upc\repository\iAdminRepository.class
 pe\edu\upc\serviceimpl\JpaUserDetailsService.class
 pe\edu\upc\service\iTeacherService.class
 pe\edu\upc\model\Course.class
-pe\edu\upc\repository\iRegistrationRepository.class
 pe\edu\upc\auth\handler\LoginSuccessHandler.class
 pe\edu\upc\utils\Session.class
 pe\edu\upc\model\Admin.class
@@ -35,5 +30,4 @@ pe\edu\upc\serviceimpl\CourseServiceImpl.class
 pe\edu\upc\serviceimpl\UserServiceImpl.class
 pe\edu\upc\serviceimpl\TeacherServiceImpl.class
 pe\edu\upc\controller\LoginController.class
-pe\edu\upc\repository\iCourseRepository.class
 pe\edu\upc\service\iCourseService.class

@@ -6,9 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.upc.model.Course;
-import pe.edu.upc.repository.iCourseRepository;
+import pe.edu.upc.controller.repository.iCourseRepository;
 import pe.edu.upc.service.iCourseService;
 
 
@@ -26,7 +27,12 @@ public class CourseServiceImpl implements iCourseService {
 		return rCourse;
 	}
 	@Override
-	public List<Course> findByNameContaining(String name)throws Exception{
-		return rCourse.findByNameContaining(name);
+	@Transactional(readOnly = true)
+	public List<Course> searchCourse(String nameCourse){
+		return rCourse.searchByName(nameCourse.toLowerCase());
 	}
+
+
+
+
 }
