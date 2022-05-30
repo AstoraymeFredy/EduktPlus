@@ -8,5 +8,6 @@ import pe.edu.upc.model.Course;
 public interface iCourseService extends iCrudService<Course, Integer>{
 	public List<Course> listCourse();
 	public List<Course> searchCourse(String nameCourse);
+	public Course searchById(String id);
 
 }
