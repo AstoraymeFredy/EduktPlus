@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.upc.model.Registration;
 import pe.edu.upc.controller.repository.iCourseRepository;
@@ -29,6 +30,22 @@ public class RegistrationServiceImpl implements iRegistrationService {
 	public List<Registration> listByStudent(int idStudent) {
 		return rRegistration.findByStudentId(idStudent);
 	}
+	
+	@Override
+	public List<Registration> searchInscription(int idStudent, String nameCourse){
+		return rRegistration.searchInscription( idStudent,nameCourse);
+	}
+
+	@Override
+	@Transactional
+	public boolean save(Registration registration) {
+		Registration objRegistration = rRegistration.save(registration);
+		if (objRegistration == null)
+			return false;
+		else
+			return true;
+	}
+
 	
 	@Override
 	public void deleteRegistration(int idStudent) {

@@ -9,7 +9,9 @@ import pe.edu.upc.model.Registration;
 
 public interface iRegistrationService {
 	public List<Registration> listByStudent(int idStudent);
+	public List<Registration> searchInscription(int idStudent, String nameCourse);
 	public void deleteRegistration(int idStudent);
+	public boolean save(Registration registration);
 	
 	public List<String[]> courseReport();
 	public List<String[]> courseReportByDates(Date start_date, Date end_date);
