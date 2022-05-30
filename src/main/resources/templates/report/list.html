@@ -48,7 +48,7 @@
 										    	<input th:field="*{end_date}" type="date" class="form-control" id="end_date"></p>
 										  	</div>
 										  	<div class="form-group sm-4 ms-2 d-flex align-items-center">
-											  	<button type="submit" class="btn btn-light">Filtrar</button>
+											  	<button type="submit" class="btn btn-light mt-2">Filtrar</button>
 										  	</div>
 										</form>
 									</div>
@@ -57,35 +57,38 @@
 						</div>
 					</div>
 					<div class="row mt-4">
-					  <div class="col-md-3 col-sm-6 mb-4">
-					    <div class="card" style="min-height: 110px;">
+					  <div class="col-md-3 col-sm-6 mb-4 d-flex align-items-stretch">
+					    <div class="card w-100" style="min-height: 110px;">
 					      <div class="card-body">
 					        <h5 class="card-title text-danger text-center fs-6">Número total de estudiantes</h5>
-					        <p class="card-text fs-2 text-center" th:text="${headerNumber[0][0]}"></p>
+					        <p class="card-text fs-2 text-center" th:if= "${headerNumber[0][0] != null}" th:text="${headerNumber[0][0]}" ></p>
 					      </div>
 					    </div>
 					  </div>
-					  <div class="col-md-3 col-sm-6 mb-4">
-					    <div class="card" style="min-height: 110px;">
+					  <div class="col-md-3 col-sm-6 mb-4 d-flex align-items-stretch">
+					    <div class="card w-100" style="min-height: 110px;">
 					      <div class="card-body">
 					        <h5 class="card-title text-danger text-center fs-6">Total recaudado</h5>
-					        <p class="card-text fs-2 text-center" th:if= "${headerNumber[0][1] != null}" th:text="'S/. ' +  ${headerNumber[0][1]}"></p>
+					        <p class="card-text fs-2 text-center" th:if= "${headerNumber[0][1] != null}" th:text="'S/. ' +  ${headerNumber[0][1]}" ></p>
+					        <p class="card-text fs-2 text-center" th:if= "${headerNumber[0][1] == null}" th:text="'S/. 0.0'" ></p>
 					      </div>
 					    </div>
 					  </div>
-					  <div class="col-md-3 col-sm-6 mb-4">
-					    <div class="card" style="min-height: 110px;">
+					  <div class="col-md-3 col-sm-6 mb-4 d-flex align-items-stretch">
+					    <div class="card w-100" style="min-height: 110px;">
 					      <div class="card-body">
 					        <h5 class="card-title text-danger text-center fs-6">Docente con más estudiantes</h5>
-					        <p class="card-text fs-3 text-center" th:if="${not #lists.isEmpty(headerTeacher)}" th:text="${headerTeacher[0][0]} +  ${headerTeacher[0][1]}"></p>
+					        <p class="card-text fs-5 text-center" th:if="${not #lists.isEmpty(headerTeacher)}" th:text="${headerTeacher[0][0]} + ' ' + ${headerTeacher[0][1]}"></p>
+					        <p class="card-text fs-2 text-center" th:if= "${#lists.isEmpty(headerTeacher)}" th:text="'-'" ></p>
 					      </div>
 					    </div>
 					  </div>
-					  <div class="col-md-3 col-sm-6 mb-4">
-					    <div class="card" style="min-height: 110px;">
+					  <div class="col-md-3 col-sm-6 mb-4 d-flex align-items-stretch">
+					    <div class="card w-100" style="min-height: 110px;">
 					      <div class="card-body">
 					        <h5 class="card-title text-danger text-center fs-6">Curso con más estudiante</h5>
-					        <p class="card-text fs-3 text-center" th:if="${not #lists.isEmpty(headerCourse)}" th:text="${headerCourse[0][0]}"></p>
+					        <p class="card-text fs-5 text-center" th:if="${not #lists.isEmpty(headerCourse)}" th:text="${headerCourse[0][0]}"></p>
+					        <p class="card-text fs-2 text-center" th:if= "${#lists.isEmpty(headerCourse)}" th:text="'-'" ></p>
 					      </div>
 					    </div>
 					  </div>
@@ -115,12 +118,18 @@
 												<td class="align-middle" th:text="${course[1]}"></td>
 												<td class="align-middle" th:text="'S/. ' + ${course[2]}"></td>
 											</tr>
+											<tr th:if="${#lists.isEmpty(listCourseReport)}">
+												<td class="align-middle text-center" colspan="4" >No hay registros relacionados</td>
+											</tr>
 										</tbody>
 									</table>
 								</div>
 							</div>
 						</div>
 
+					</div>
+					<div th:if="${message}" class="alert alert-danger">
+						<p th:text="${message}"></p>
 					</div>
 				</div>
 			</main>
