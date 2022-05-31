@@ -32,6 +32,11 @@ public class RegistrationServiceImpl implements iRegistrationService {
 	}
 	
 	@Override
+	public List<Registration> listall() {
+		return rRegistration.findAll();
+	}
+	
+	@Override
 	public List<Registration> searchInscription(int idStudent, String nameCourse){
 		return rRegistration.searchInscription( idStudent,nameCourse);
 	}

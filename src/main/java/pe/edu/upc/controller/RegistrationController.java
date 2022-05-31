@@ -110,21 +110,50 @@ public class RegistrationController {
 	public String registrarmatricula(Model model, @RequestParam(value = "id") Integer id) {
 		Registration registration = new Registration();
 		 List<Registration> list = rService.listByStudent(sesion.getStudent().getId_student());
+		 List<Registration> listcompare = rService.listall();
+
 		Course course= cService.searchById(String.valueOf(id));
-		registration.setCourse(course);
-		registration.setDate_register(new Date());
-		registration.setEnabled(true);
-		registration.setStudent(sesion.getStudent());
+		int count =0;
+		for (int i = 0; i < listcompare.size(); i++) {
+			if(listcompare.get(i).getCourse().getId_course() ==course.getId_course()) count++;
+		}
 		
-					boolean flag=rService.save(registration);
-			if(flag) {
-				list = rService.listByStudent(sesion.getStudent().getId_student());
-				model.addAttribute("listInscription", list);
-				if (list.isEmpty()) model.addAttribute("vacio", 1);
-				model.addAttribute("course", new Course());
-				model.addAttribute("inf","Registro exitoso");
-				return "registration/listMyCourses";
-			}
+		if(count < 10) {
+			registration.setCourse(course);
+			registration.setDate_register(new Date());
+			registration.setEnabled(true);
+			registration.setStudent(sesion.getStudent());
+			
+				rService.save(registration);
+					list = rService.listByStudent(sesion.getStudent().getId_student());
+					model.addAttribute("listInscription", list);
+					if (list.isEmpty()) model.addAttribute("vacio", 1);
+					model.addAttribute("course", new Course());
+					model.addAttribute("inf","Registro exitoso");
+					return "registration/listMyCourses";
+			
+		}		
+		else if(count >= 10) {
+			 List<Course> listCourse =  cService.listCourse();
+			 List<Registration> listRegistration =  rService.listByStudent(sesion.getStudent().getId_student());;
+			
+			 for (int i = 0; i < listRegistration.size(); i++) {
+				 for (int j = 0; j < listCourse.size(); j++) {
+					 if(listRegistration.get(i).getCourse().getId_course() == listCourse.get(j).getId_course()) {
+						 for (int n = 0; n < listCourse.size(); n++) {
+							if(listCourse.get(n).getId_course() ==listCourse.get(j).getId_course()) { listCourse.remove(n); break;}
+						 }					 
+						 break;
+					 }				 
+				 }  
+			 }
+			 
+			if (listCourse.isEmpty())  model.addAttribute("vacio", 2);
+			model.addAttribute("listCourse",listCourse);
+			model.addAttribute("error", "Error: El curso ya esta lleno.");
+			model.addAttribute("course", new Course());
+			return "registration/listSelectCourse";
+		}
 			else {
 				 List<Course> listCourse =  cService.listCourse();
 				 List<Registration> listRegistration =  rService.listByStudent(sesion.getStudent().getId_student());;
@@ -146,8 +175,7 @@ public class RegistrationController {
 				model.addAttribute("course", new Course());
 				return "registration/listSelectCourse";
 			}
-			
-		}
-	
-	
+
+	}
 }
+
