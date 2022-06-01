@@ -5,7 +5,7 @@ INSERT INTO usuario (password,username) VALUES ('$2a$10$2Vm9AnyFTfnukmkpN5whgu1A
 
 
 
-INSERT INTO administrador (apellidos, nombre, id_usuario) VALUES ('Belez', 'Humberto', 1);
+INSERT INTO administrador (apellidos, nombre, id_usuario) VALUES ('Belez', 'Humbertos', 1);
 INSERT INTO estudiante ( fecha, dni, email, apellidos, nombre, id_usuario) VALUES ('2000-08-20', '12345678', 'pablo.marmol@gmail.com', 'Marmol', 'Pablo', 2);
 INSERT INTO estudiante ( fecha, dni, email, apellidos, nombre, id_usuario) VALUES ('2000-08-21', '87564123', 'luisa.gallego@gmail.com', 'Gallego Basteri', 'Luisa', 1);
 INSERT INTO estudiante ( fecha, dni, email, apellidos, nombre, id_usuario) VALUES ('2000-08-23', '87564123', 'terry.kang@gmail.com', 'Kang Luca', 'Terry', 1);
@@ -17,7 +17,8 @@ INSERT INTO docente ( fecha, dni, email, apellidos, nombre, celular) VALUES ('20
 
 
 INSERT INTO curso ( descripción, nombre, precio, id_teacher) VALUES ('Con este curso de Excel de básico a avanzado, aprenderás cuáles son los aspectos y funcionalidades más complejas.', 'Excel Avanzado', 50, 1);
-INSERT INTO curso ( descripción, nombre, precio, id_teacher) VALUES ('Con este curso de PowerPoint de básico a avanzado, aprenderás a realizar presetaciones avanzadas empleando nuevas herramientas.', 'PowerPoint Avanzado', 100, 1);
+INSERT INTO curso ( descripción, nombre, precio, id_teacher) VALUES ('Con este curso de PowerPoint de básico a avanzado, aprenderás a realizar presetaciones avanzadas empleando nuevas herramientas.', 'PowerPoint Avanzado', 100, 2);
+INSERT INTO curso ( descripción, nombre, precio, id_teacher) VALUES ('Este curso te dará las herramientas necesarias para convertirte en un experto en el tema, empezaremos desde lo más básico hasta operaciones complejas.', 'MATLAB Básico', 170, 3);
 
 
 INSERT INTO matricula ( fecha_registro, enabled, id_course, id_student) VALUES ('2022-03-20',true, 1, 1);

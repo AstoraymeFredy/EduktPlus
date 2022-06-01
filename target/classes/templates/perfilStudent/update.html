@@ -54,9 +54,9 @@
 										<!-- row -->
 
 										<input id="usuario" placeholder="Ingrese su nombre"
-											th:field="*{id_student}" Type="hidden"/>
-											
-											 <input id="usuario" placeholder="Ingrese su nombre" th:field="*{user.id_user}"  Type="hidden"/>
+											th:field="*{id_student}" Type="hidden" /> <input
+											id="usuario" placeholder="Ingrese su nombre"
+											th:field="*{user.id_user}" Type="hidden" />
 
 										<div class="mb-4 row">
 
@@ -65,10 +65,9 @@
 	                                            form-label">Nombre:</label>
 											<div class="col-md-8 col-12">
 												<input id="usuario" placeholder="Ingrese su nombre"
-													th:field="*{name}" type="text" class="form-control" />
-												<small class="form-text text-danger"
-													th:if="${#fields.hasErrors('name')}"
-													th:errors="*{name}"></small>
+													th:field="*{name}" type="text" class="form-control" /> <small
+													class="form-text text-danger"
+													th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>
 											</div>
 										</div>
 
@@ -94,10 +93,9 @@
 	                                            form-label">Correo:</label>
 											<div class="col-md-8 col-12">
 												<input id="email" placeholder="Ingrese su correo"
-													th:field="*{email}" type="text" class="form-control" />
-												<small class="form-text text-danger"
-													th:if="${#fields.hasErrors('email')}"
-													th:errors="*{email}"></small>
+													th:field="*{email}" type="text" class="form-control"
+													readonly /> <small class="form-text text-danger"
+													th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
 											</div>
 										</div>
 
@@ -108,10 +106,9 @@
 	                                            form-label">DNI:</label>
 											<div class="col-md-8 col-12">
 												<input id="usuario" placeholder="Ingrese su apellido"
-													th:field="*{dni}" type="text" class="form-control" />
+													th:field="*{dni}" type="text" class="form-control" readonly />
 												<small class="form-text text-danger"
-													th:if="${#fields.hasErrors('dni')}"
-													th:errors="*{dni}"></small>
+													th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></small>
 											</div>
 										</div>
 
@@ -120,7 +117,8 @@
 										<div class="mb-4 row">
 											<label for="password"
 												class="col-sm-4 col-form-label
-	                                            form-label">Fecha de nacimiento:</label>
+	                                            form-label">Fecha
+												de nacimiento:</label>
 											<div class="col-md-8 col-12">
 												<input id="usuario" placeholder="Ingrese su celular"
 													Type="date" th:field="*{birth_date}" class="form-control" />
@@ -128,18 +126,26 @@
 													th:if="${#fields.hasErrors('birth_date')}"
 													th:errors="*{birth_date}"></small>
 											</div>
-										
+
 										</div>
 
+										<div class="mb-4 row">
+											<label for="password"
+												class="col-sm-4 col-form-label
+	                                            form-label">Usuario</label>
+											<div class="col-md-8 col-12">
+												<input id="password" class="form-control"
+													th:field="*{user.username}" placeholder="Dato oculto"
+													type="text" readonly>
+											</div>
 
+										</div>
 										<div class="mt-2">
 											<a href="/student/view" class="btn btn-secondary px-4 me-2">Cancelar</a>
 											<button type="submit" class="btn btn-primary px-4">Guardar</button>
 										</div>
 
 									</form>
-
-
 
 								</div>
 							</div>
