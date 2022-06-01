@@ -100,12 +100,18 @@
 													th:href="@{'/student/delete?id='}+${res.id_student}"><i
 														class="bi bi-trash"></i></a></td>
 											</tr>
+											<tr th:if="${#lists.isEmpty(listStudent)}">
+												<td class="align-middle text-center" colspan="8" >No hay registros relacionados</td>
+											</tr>
 										</tbody>
 									</table>
 								</div>
 							</div>
 						</div>
 
+					</div>
+					<div th:if="${mensaje}" class="alert alert-danger">
+						<p th:text="${mensaje}"></p>
 					</div>
 				</div>
 			</main>

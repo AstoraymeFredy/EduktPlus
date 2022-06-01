@@ -88,7 +88,7 @@
 												class="col-sm-4 col-form-label
 	                                            form-label">Correo*:</label>
 											<div class="col-md-8 col-12">
-												<input id="email" placeholder="Ingrese el correo"
+												<input id="email" readonly="readonly" placeholder="Ingrese el correo"
 													th:field="*{email}" type="text" class="form-control" /> <small
 													class="form-text text-danger"
 													th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
@@ -101,7 +101,7 @@
 												class="col-sm-4 col-form-label
 	                                            form-label">DNI:</label>
 											<div class="col-md-8 col-12">
-												<input id="dni" placeholder="Ingrese el DNI"
+												<input id="dni" readonly="readonly" placeholder="Ingrese el DNI"
 													th:field="*{dni}" type="text" class="form-control" /> <small
 													class="form-text text-danger"
 													th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></small>
@@ -168,6 +168,9 @@
 								</div>
 							</div>
 						</div>
+					</div>
+					<div th:if="${mensaje}" class="alert alert-danger">
+						<p th:text="${mensaje}"></p>
 					</div>
 				</div>
 			</main>
