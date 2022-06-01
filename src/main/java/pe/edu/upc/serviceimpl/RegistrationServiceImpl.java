@@ -38,7 +38,7 @@ public class RegistrationServiceImpl implements iRegistrationService {
 	
 	@Override
 	public List<Registration> searchInscription(int idStudent, String nameCourse){
-		return rRegistration.searchInscription( idStudent,nameCourse);
+		return rRegistration.searchInscription( idStudent,nameCourse.toLowerCase());
 	}
 
 	@Override
