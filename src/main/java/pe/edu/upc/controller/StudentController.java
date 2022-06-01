@@ -151,7 +151,9 @@ public class StudentController {
 			if (flag) {
 				httpSession.setAttribute("nameUser", objStudent.getName() + " " + objStudent.getLastname());
 				sesion.setStudent(objStudent);
-				return "redirect:/student/view";
+				model.addAttribute("inf", "Actualización exitosa");
+				model.addAttribute("student",sesion.getStudent());
+				return "perfilStudent/view";
 			} else {
 				return "redirect:/student/edit";
 			}
