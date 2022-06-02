@@ -474,12 +474,6 @@ body {
     color: #f26464;
 }
 
-.alert {
-	position: absolute;
-    top: 0px;
-    right: 5%;
-}
-
 .main-nav .nav-user-img {
     border-radius: 50%;
     display: -webkit-box;

@@ -35,6 +35,10 @@ public class ReportController {
 	public String reportCourseByDates(Map<String, Object> model, @ModelAttribute ReportSearch reportSearch) throws ParseException {
 		if (reportSearch.getStart_date() == null || reportSearch.getEnd_date() == null) {
 			model.put("message", "Error: Debes seleccionar el rango de fecha");
+			model.put("listCourseReport", sRegistration.courseReport());
+			model.put("headerNumber", sRegistration.headerReportNumber());
+			model.put("headerCourse", sRegistration.headerReportCourse());
+			model.put("headerTeacher", sRegistration.headerReportTeacher());
 		} else {
 			if (reportSearch.getEnd_date().after(reportSearch.getStart_date())) {
 				model.put("message", null);

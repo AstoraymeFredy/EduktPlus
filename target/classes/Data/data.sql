@@ -76,4 +76,3 @@ INSERT INTO matricula ( fecha_registro, enabled, id_course, id_student) VALUES (
 INSERT INTO matricula ( fecha_registro, enabled, id_course, id_student) VALUES ('2022-03-20',true, 11, 7);
 
 INSERT INTO matricula ( fecha_registro, enabled, id_course, id_student) VALUES ('2022-05-25',true, 10, 8);
-
