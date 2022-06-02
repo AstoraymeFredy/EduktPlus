@@ -31,14 +31,15 @@
 							</div>
 						</div>
 						<div class="col mb-4">
-							<form method="get" class="d-flex" th:action="@{/registration/buscarcursos}" th:object="${course}">
+							<form method="get" class="d-flex"
+								th:action="@{/registration/buscarcursos}" th:object="${course}">
 								<input id="search" placeholder="Busca por nombre de curso"
 									th:field="*{name}" type="text" class="form-control" />
 								<button type="submit" class="btn btn-primary ms-2">
 									<i class="bi bi-search"></i>
 								</button>
 
-								
+
 
 							</form>
 						</div>
@@ -50,6 +51,13 @@
 								<p class="mb-0 fs-5 text-muted">Agrega el curso de tu
 									preferencia</p>
 							</div>
+						</div>
+						<div class="col-xl-9 col-lg-8 col-md-12 col-12">
+							<div class="alert alert-danger" th:if="${error != null}"
+								th:text="${error}"></div>
+							<div th:if="${vacio ==2}">
+							<p class="text-center fs-5">No hay registros</p>
+						</div>
 						</div>
 					</div>
 
@@ -69,15 +77,18 @@
 										<div class="col">
 											<h5 class="card-title" th:text="${c.name}"></h5>
 											<p class="card-text"
-												th:text="Docente+': ' +${c.teacher.name}"></p>
+												th:text="Docente+': ' +${c.teacher.name} + ' '+ ${c.teacher.lastname}"></p>
 										</div>
 										<div class="col">
 											<p class="card-text bg-light p-2" th:text="${c.description}"></p>
 										</div>
 										<div
 											class="col-auto d-flex flex-column justify-content-between">
-											<p class="card-text text-danger fw-bold text-end fs-5 " th:text="'S/.' + ${ #numbers.formatDecimal(c.price,1,2,'POINT')}"></p>
-											<a th:href="@{/registration/registrarmatricula?id=}+${c.id_course}" type="button" class="btn btn-danger">Inscribirse</a>
+											<p class="card-text text-danger fw-bold text-end fs-5 "
+												th:text="'S/.' + ${ #numbers.formatDecimal(c.price,1,2,'POINT')}"></p>
+											<a
+												th:href="@{/registration/registrarmatricula?id=}+${c.id_course}"
+												type="button" class="btn btn-danger">Inscribirse</a>
 										</div>
 									</div>
 								</div>
