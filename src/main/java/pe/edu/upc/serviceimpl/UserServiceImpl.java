@@ -30,4 +30,9 @@ public class UserServiceImpl implements iUserService {
 		return dUser.findByUsernameRepeated(username);
 	}
 
+	@Override
+	public void deleteUser(int idUser) {
+		dUser.deleteById(idUser);
+	}
+
 }

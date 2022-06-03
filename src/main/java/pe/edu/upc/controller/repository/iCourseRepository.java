@@ -16,6 +16,9 @@ public interface iCourseRepository extends JpaRepository<Course, Integer> {
 	@Query("from Course c where lower(c.name) like %:nameCourse%")
 	List<Course> searchByName(@Param("nameCourse")String nameCourse);
 
+	@Query("from Course c where CAST(c.id_course AS string) = :idCourse")
+	Course searchById(@Param("idCourse")String idCourse);
+	
 	@Query(value = "SELECT c.nombre, count(m.id_registration), sum(c.precio) as profit "
 			+ "from curso c join matricula m on c.id_course = m.id_course "
 			+ "group by c.nombre " + "order by profit DESC", nativeQuery = true)

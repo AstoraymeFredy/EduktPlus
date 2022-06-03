@@ -73,7 +73,15 @@ public class StudentController {
 			throws ParseException {
 
 		if (binRes.hasErrors()) {
-			return "student/register";
+			int id = objStudent.getId_student();
+			if(id != 0) {
+				model.addAttribute("mensaje", "Ocurrio un error");
+				return "student/update";
+			} else {
+				model.addAttribute("mensaje", "Ocurrio un error");
+				return "student/register";
+			}
+			
 		} else {
 			UserModel user = objStudent.getUser();
 			user.setUsername(user.getUsername().trim());
@@ -105,7 +113,9 @@ public class StudentController {
 	public String deleteStudent(Map<String, Object> model, Student student, @RequestParam(value = "id") Integer id) {
 		try {
 			if (id != null && id > 0) {
+				Student studendg = sService.findById(id);
 				sService.deleteStudent(id);
+				uService.deleteUser(studendg.getUser().getId_user());
 				model.put("listStudent", sService.listStudent());
 			}
 		} catch (Exception ex) {
@@ -151,7 +161,9 @@ public class StudentController {
 			if (flag) {
 				httpSession.setAttribute("nameUser", objStudent.getName() + " " + objStudent.getLastname());
 				sesion.setStudent(objStudent);
-				return "redirect:/student/view";
+				model.addAttribute("inf", "Actualización exitosa");
+				model.addAttribute("student",sesion.getStudent());
+				return "perfilStudent/view";
 			} else {
 				return "redirect:/student/edit";
 			}

@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pe.edu.upc.model.Course;
+import pe.edu.upc.model.Registration;
 import pe.edu.upc.model.Teacher;
 import pe.edu.upc.service.iCourseService;
 import pe.edu.upc.service.iTeacherService;
@@ -133,4 +134,6 @@ public class CourseController {
         model.put("listCourse", listCourse);
         return  "course/list";
     }
+    
+   
 }
