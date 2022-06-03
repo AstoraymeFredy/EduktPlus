@@ -94,6 +94,9 @@
                                                th:href="@{'/course/del/'}+${course.id_course}"><i
                                                     class="bi bi-trash"></i></a></td>
                                     </tr>
+                                    <tr th:if="${#lists.isEmpty(listCourse)}">
+                                        <td class="align-middle text-center" colspan="8" >No hay registros relacionados</td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>

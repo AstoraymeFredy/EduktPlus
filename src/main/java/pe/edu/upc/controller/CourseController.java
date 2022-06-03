@@ -5,11 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pe.edu.upc.model.Course;
 import pe.edu.upc.model.Teacher;
 import pe.edu.upc.service.iCourseService;
 import pe.edu.upc.service.iTeacherService;
-import pe.edu.upc.utils.CourseSearch;
 
 import javax.validation.Valid;
 import java.text.ParseException;
@@ -53,14 +53,18 @@ public class CourseController {
     @PostMapping("saveNew")
     public String saveNew(Model model, @Valid @ModelAttribute("course") Course course,
                           BindingResult result) {
-        if(result.hasErrors()) {  }
+        List<Teacher> teachers = teacherService.listTeacher();
+        model.addAttribute("teachers",teachers);
+        if (result.hasErrors()) {
+            return "course/register";
+        }
 
         try {
             Course courseSaved = courseService.create(course);
             model.addAttribute("course", courseSaved);
 
         } catch (Exception e) {
-            // TODO: handle exception
+
         }
         return "redirect:/course/list";
     }
@@ -83,12 +87,21 @@ public class CourseController {
     }
 
     @PostMapping("saveedit")
-    public String saveEdit(Model model, @ModelAttribute("country") Course course ) {
+    public String saveEdit(Model model, @ModelAttribute("course") Course course, RedirectAttributes objRedir,
+                           BindingResult result ) throws ParseException {
+        if (result.hasErrors()) {
+            return "course/update";
+        }
+        List<Teacher> teachers = teacherService.listTeacher();
+        model.addAttribute("teachers",teachers);
         try {
             Course courseSaved = courseService.update(course);
             model.addAttribute("course", courseSaved);
+            if (courseSaved == null) {
+                objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
+            }
         } catch (Exception e) {
-
+            return "course/update";
         }
         return "redirect:/course/list";
     }
@@ -99,10 +112,11 @@ public class CourseController {
             if(courseService.existsById(id)) {
                 courseService.deleteById(id);
             }
-
-        }catch(	Exception e) {}
-
-        return "course/list";
+        }catch(	Exception e) {
+           System.out.println("Error: El curso no se puede eliminar porque hay alumnos inscritos");
+            return "redirect:/course/list";
+        }
+        return "redirect:/course/list";
     }
 
     @RequestMapping("/search")
