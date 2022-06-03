@@ -1,5 +1,7 @@
 
+
 INSERT INTO usuario (password,username) VALUES ('$2a$10$UCGyX7aXX4jugVnQNt.9pOzEhOLD1z2KVzbZK/Bi1Dy6KZiqhZOy2','admin');
+
 
 INSERT INTO usuario (password,username) VALUES ('$2a$10$2Vm9AnyFTfnukmkpN5whgu1AP1itO6JWXNDRKll4TznsWEuRISm5e','estudiante');
 INSERT INTO usuario (password,username) VALUES ('$2a$10$BUyqe5VknBu/H5VMqmHiG.bY8YfCo2oJzdyoN0hfDXg/7we.kzxrG','fredy');
@@ -10,8 +12,8 @@ INSERT INTO usuario (password,username) VALUES ('$2a$10$ztOmV8AZfMOF5SCc//7n6eLH
 INSERT INTO usuario (password,username) VALUES ('$2a$10$VBqPIUoeHLgKFlFan1orIumwCNDxRF1F5PcpksM3WQK/uZ00ZZSwm','luisa');
 INSERT INTO usuario (password,username) VALUES ('$2a$10$sTHHl392Ahncc/o4wt3Jyube53nW2vl8wU0cBwKcNrXQEPsOp6W8O','terry');
 
-
 INSERT INTO administrador (apellidos, nombre, id_usuario) VALUES ('Belez', 'Humberto', 1);
+
 
 INSERT INTO estudiante ( fecha, dni, email, apellidos, nombre, id_usuario) VALUES ('1999-01-20', '12345678', 'pablo.marmol@gmail.com', 'Marmol', 'Pablo', 2);
 INSERT INTO estudiante ( fecha, dni, email, apellidos, nombre, id_usuario) VALUES ('2000-02-15', '12345679', 'fredy@gmail.com', 'astorayme', 'fredy', 3);
@@ -21,7 +23,6 @@ INSERT INTO estudiante ( fecha, dni, email, apellidos, nombre, id_usuario) VALUE
 INSERT INTO estudiante ( fecha, dni, email, apellidos, nombre, id_usuario) VALUES ('2001-12-07', '12346555', 'lisa@gmail.com', 'simpson', 'lisa', 7);
 INSERT INTO estudiante ( fecha, dni, email, apellidos, nombre, id_usuario) VALUES ('2000-08-21', '87564123', 'luisa.gallego@gmail.com', 'Gallego Basteri', 'Luisa', 8);
 INSERT INTO estudiante ( fecha, dni, email, apellidos, nombre, id_usuario) VALUES ('2000-08-23', '87564123', 'terry.kang@gmail.com', 'Kang Luca', 'Terry', 9);
-
 
 INSERT INTO docente ( fecha, dni, email, apellidos, nombre, celular) VALUES ('1985-03-20', '70365678', 'profesor1.edukate@gmail.com', 'Perez Astorayme', 'Juan', '985645852');
 INSERT INTO docente ( fecha, dni, email, apellidos, nombre, celular) VALUES ('1993-12-21', '70322678', 'profesor2.edukate@gmail.com', 'Torres Choi', 'Subin', '98234552');
@@ -76,4 +77,3 @@ INSERT INTO matricula ( fecha_registro, enabled, id_course, id_student) VALUES (
 INSERT INTO matricula ( fecha_registro, enabled, id_course, id_student) VALUES ('2022-03-20',true, 11, 7);
 
 INSERT INTO matricula ( fecha_registro, enabled, id_course, id_student) VALUES ('2022-05-25',true, 10, 8);
-

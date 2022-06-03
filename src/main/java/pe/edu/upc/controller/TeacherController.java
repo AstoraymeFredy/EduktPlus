@@ -39,6 +39,7 @@ public class TeacherController {
         try {
             model.addAttribute("teacher", new Teacher());
         } catch (Exception e) {
+            // TODO: handle exception
         }
         return "teacher/register";
     }
@@ -46,20 +47,22 @@ public class TeacherController {
     @PostMapping("saveNew")
     public String saveNew(Model model, @Valid @ModelAttribute("teacher") Teacher teacher,
                           BindingResult result) {
-        if(result.hasErrors()) {  }
+        if(result.hasErrors()) {
+            return "teacher/register"; }
 
         try {
            Teacher teacherSaved = teacherService.create(teacher);
             model.addAttribute("teacher", teacherSaved);
 
         } catch (Exception e) {
+            // TODO: handle exception
 
         }
         return "redirect:/teacher/list";
     }
 
     @GetMapping("/edit/{id}")
-    public String editTeacher(Model model, @PathVariable("id") Integer id) {
+    public String edit(Model model, @PathVariable("id") Integer id) {
         try {
             if(teacherService.existsById(id)) {
                 Optional<Teacher> optional = teacherService.findById(id);
@@ -74,14 +77,19 @@ public class TeacherController {
     }
 
     @PostMapping("saveedit")
-    public String saveEdit(Model model, @ModelAttribute("teacher") Teacher teacher ) {
+    public String saveEdit(Model model, @ModelAttribute("teacher") Teacher teacher,
+                           BindingResult result )throws ParseException {
         try {
-            Teacher teacherSaved = teacherService.update(teacher);
-            model.addAttribute("teacher", teacherSaved);
-        } catch (Exception e) {
+                    Teacher teacherSaved = teacherService.update(teacher);
+                    model.addAttribute("teacher", teacherSaved);
+            } catch (Exception e) {
+                result.getFieldErrors();
+                return "teacher/update";
 
-        }
-        return "redirect:/teacher/list";
+            }
+            return "redirect:/teacher/list";
+
+
     }
 
     @GetMapping("/del/{id}")

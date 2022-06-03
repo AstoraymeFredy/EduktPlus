@@ -10,8 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 @Entity
 @Table(name="Curso")
@@ -24,13 +23,17 @@ public class Course implements Serializable  {
 	private int id_course;
 
 	@NotEmpty(message = "Ingrese su nombre")
+	@Pattern(regexp = "[^0-9]*", message = "El nombre no debe contener números")
 	@Column(name="nombre", nullable=false, length=80)
 	private String name;
-	
+
+	@Size(min = 1, max = 200, message = "La descripción está vacía")
 	@NotEmpty(message = "Ingrese su descripción")
 	@Column(name="descripción", nullable=false, length=200)
 	private String description;
-	
+
+
+	@Min(value = 0, message = "Ingrese un precio")
 	@Column(name="precio", nullable=false)
 	private float price;
 	
@@ -45,8 +48,11 @@ public class Course implements Serializable  {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Course(int id_course, @NotEmpty(message = "Ingrese su nombre") String name,
-			@NotEmpty(message = "Ingrese su descripción") String description, float price,
+
+	public Course(int id_course,
+			@NotEmpty(message = "Ingrese su nombre") @Pattern(regexp = "[^0-9]*", message = "El nombre no debe contener números") String name,
+			@Size(min = 1, max = 200, message = "La descripción está vacía") @NotEmpty(message = "Ingrese su descripción") String description,
+			@Min(value = 0, message = "El precio debe ser mínimo 0") float price,
 			@NotNull(message = "Seleccione docente a cargo") Teacher teacher) {
 		super();
 		this.id_course = id_course;

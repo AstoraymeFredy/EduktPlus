@@ -73,8 +73,8 @@
 	                                            form-label">Precio:</label>
                                         <div class="col-md-8 col-12">
                                             <input id="price" placeholder="Ingrese un precio"
-                                                   th:field="*{price}" type="text" class="form-control" />
-                                            <small class="form-text text-danger"
+                                                   th:field="*{price}" type="text" class="form-control" /> <small
+                                                    class="form-text text-danger"
                                                    th:if="${#fields.hasErrors('price')}"
                                                    th:errors="*{price}"></small>
                                         </div>
