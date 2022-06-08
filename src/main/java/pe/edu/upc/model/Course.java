@@ -1,6 +1,7 @@
 package pe.edu.upc.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,20 +23,21 @@ public class Course implements Serializable  {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id_course;
 
-	@NotEmpty(message = "Ingrese su nombre")
+	@NotEmpty(message = "Ingrese un nombre para el curso")
 	@Pattern(regexp = "[^0-9]*", message = "El nombre no debe contener números")
 	@Column(name="nombre", nullable=false, length=80)
 	private String name;
 
-	@Size(min = 1, max = 200, message = "La descripción está vacía")
+	@Size(min = 1, max = 200, message = "El campo descripción está vacío")
 	@NotEmpty(message = "Ingrese su descripción")
 	@Column(name="descripción", nullable=false, length=200)
 	private String description;
 
-
-	@Min(value = 0, message = "Ingrese un precio")
+	@NotNull(message = "Ingrese un precio")
+	@Min(value = 1, message = "Ingrese un precio mayor a 0")
 	@Column(name="precio", nullable=false)
-	private float price;
+	private BigDecimal price;
+
 	
 	@NotNull(message = "Seleccione docente a cargo")
 	@ManyToOne
@@ -52,7 +54,7 @@ public class Course implements Serializable  {
 	public Course(int id_course,
 			@NotEmpty(message = "Ingrese su nombre") @Pattern(regexp = "[^0-9]*", message = "El nombre no debe contener números") String name,
 			@Size(min = 1, max = 200, message = "La descripción está vacía") @NotEmpty(message = "Ingrese su descripción") String description,
-			@Min(value = 0, message = "El precio debe ser mínimo 0") float price,
+			@NotNull(message = "Ingrese un precio") @Min(value = 1, message = "Ingrese un precio mayor a 0") BigDecimal price,
 			@NotNull(message = "Seleccione docente a cargo") Teacher teacher) {
 		super();
 		this.id_course = id_course;
@@ -87,11 +89,11 @@ public class Course implements Serializable  {
 		this.description = description;
 	}
 
-	public float getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(float price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 
