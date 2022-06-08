@@ -1,5 +1,6 @@
 package pe.edu.upc.controller;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -54,10 +55,6 @@ public class StudentController {
 			listaStudent = sService.searchStudentLastname(student.getName());
 		}
 		
-		if (listaStudent.isEmpty()) {
-			model.put("mensaje", "No existen coincidencias");
-		}
-		
 		model.put("listStudent", listaStudent);		
 		return  "student/list";
 	}	
@@ -75,10 +72,10 @@ public class StudentController {
 		if (binRes.hasErrors()) {
 			int id = objStudent.getId_student();
 			if(id != 0) {
-				model.addAttribute("mensaje", "Ocurrio un error");
+				model.addAttribute("mensaje1", "Ocurrio un error");
 				return "student/update";
 			} else {
-				model.addAttribute("mensaje", "Ocurrio un error");
+				model.addAttribute("mensaje1", "Ocurrio un error");
 				return "student/register";
 			}
 			
@@ -86,14 +83,35 @@ public class StudentController {
 			UserModel user = objStudent.getUser();
 			user.setUsername(user.getUsername().trim());
 			user.setPassword(user.getPassword().trim());
-			
-			boolean flag = uService.createUser(user);
-			if (flag) {
-				objStudent.setUser(user);
-				flag = sService.createStudent(objStudent);
+			Calendar birth_date = objStudent.getBirth_date();
+			Calendar today = Calendar.getInstance();
+			int age = today.get(1) - birth_date.get(1);
+			if (age < 14) {
+				model.addAttribute("mensaje", "La edad mínima para el registro es 14");
+				return "student/register";
+			}
+			boolean flag = true;
+			try {
+				flag = uService.createUser(user);
+			} catch (Exception e) {
+				model.addAttribute("mensaje", "El usuario ya existe");
+				return "student/register";
 			}
 			if (flag) {
-				return "redirect:/student/list";
+				objStudent.setUser(user);
+				
+				try {
+					flag = sService.createStudent(objStudent);
+				} catch (Exception e) {
+					model.addAttribute("mensaje", "El DNI ya existe");
+					return "student/register";
+				}
+			} 
+			if (flag) {
+				model.addAttribute("mensaje2","Registro exitoso");
+				model.addAttribute("listStudent", sService.listStudent());
+				model.addAttribute("student", new Student());
+				return  "student/list";
 			}	
 			else {
 				int id = objStudent.getId_student();

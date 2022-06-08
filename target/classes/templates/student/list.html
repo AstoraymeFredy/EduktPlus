@@ -55,6 +55,12 @@
 							</div>
 						</div>
 					</div>
+					<div th:if="${mensaje1}" class="alert alert-danger">
+						<p th:text="${mensaje1}"></p>
+					</div>
+					<div th:if="${mensaje2}" class="alert alert-info">
+						<p th:text="${mensaje2}"></p>
+					</div>
 					<div class="row mb-4">
 						<div class="col-12">
 							<!-- card -->					
@@ -110,9 +116,7 @@
 						</div>
 
 					</div>
-					<div th:if="${mensaje}" class="alert alert-danger">
-						<p th:text="${mensaje}"></p>
-					</div>
+					
 				</div>
 			</main>
 		</div>
