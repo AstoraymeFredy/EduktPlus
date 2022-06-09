@@ -60,9 +60,22 @@ public class TeacherController {
             }
 
         } else {
-                boolean flag = teacherService.createTeacher(objTeacher);
-                if(flag) {
-                    return "redirect:/teacher/list";
+                boolean flag = true;
+
+            if (flag) {
+                try {
+                    flag =  teacherService.createTeacher(objTeacher);
+                } catch (Exception e) {
+                    model.addAttribute("mensaje", "El DNI ya existe");
+                    return "teacher/register";
+                }
+            }
+
+            if(flag) {
+                    model.addAttribute("success","Registro exitoso");
+                    model.addAttribute("listTeacher", teacherService.listTeacher());
+                    model.addAttribute("teacher", new Teacher());
+                    return "teacher/list";
                 }
                 int id = objTeacher.getId_teacher();
                 if(id != 0) {
