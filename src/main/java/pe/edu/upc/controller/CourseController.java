@@ -72,7 +72,10 @@ public class CourseController {
             model.addAttribute("teachers",teachers);
             boolean flag = courseService.createCourse(objCourse);
             if(flag) {
-                return "redirect:/course/list";
+                model.addAttribute("success","Registro exitoso");
+                model.addAttribute("listCourse", courseService.listCourse());
+                model.addAttribute("course", new Course());
+                return "course/list";
             }
             int id = objCourse.getId_course();
             if(id != 0) {
