@@ -20,10 +20,27 @@ public class TeacherServiceImpl implements iTeacherService {
         return rTeacher;
     }
 
+
+    @Override
+    @Transactional
+    public boolean createTeacher(Teacher teacher) {
+        Teacher objTeacher = rTeacher.save(teacher);
+        if (objTeacher == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     @Override
     @Transactional(readOnly = true)
     public List<Teacher> listTeacher() {
         return rTeacher.findAll();
+    }
+
+    @Override
+    public void deleteTeacher(int idTeacher) {
+        rTeacher.deleteById(idTeacher);
     }
 
     @Override

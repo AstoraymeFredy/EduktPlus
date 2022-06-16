@@ -5,16 +5,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pe.edu.upc.model.Course;
-import pe.edu.upc.model.Registration;
 import pe.edu.upc.model.Teacher;
 import pe.edu.upc.service.iCourseService;
 import pe.edu.upc.service.iTeacherService;
-import pe.edu.upc.utils.CourseSearch;
 
 import javax.validation.Valid;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -51,21 +49,46 @@ public class CourseController {
         return "course/register";
     }
 
-    @PostMapping("saveNew")
-    public String saveNew(Model model, @Valid @ModelAttribute("course") Course course,
-                          BindingResult result) {
-        if(result.hasErrors()) {  }
 
-        try {
-            Course courseSaved = courseService.create(course);
-            model.addAttribute("course", courseSaved);
 
-        } catch (Exception e) {
-            // TODO: handle exception
+    @RequestMapping("/saveNew")
+    public String register(@Valid @ModelAttribute Course objCourse, BindingResult binRes, Model model)
+            throws com.sun.el.parser.ParseException {
+
+        if (binRes.hasErrors()) {
+            List<Teacher> teachers = teacherService.listTeacher();
+            model.addAttribute("teachers",teachers);
+            int id = objCourse.getId_course();
+            if(id != 0) {
+                model.addAttribute("mensaje", "Ocurrio un error");
+                return "course/update";
+            } else {
+                model.addAttribute("mensaje", "Ocurrio un error");
+                return "course/register";
+            }
+
+        } else {
+            List<Teacher> teachers = teacherService.listTeacher();
+            model.addAttribute("teachers",teachers);
+            boolean flag = courseService.createCourse(objCourse);
+            if(flag) {
+                model.addAttribute("success","Registro exitoso");
+                model.addAttribute("listCourse", courseService.listCourse());
+                model.addAttribute("course", new Course());
+                return "course/list";
+            }
+            int id = objCourse.getId_course();
+            if(id != 0) {
+                model.addAttribute("mensaje", "Ocurrio un error");
+                return "redirect:/course/update";
+            } else {
+                model.addAttribute("mensaje", "Ocurrio un error");
+                return "redirect:/course/register";
+            }
+
+
         }
-        return "redirect:/course/list";
     }
-
     @GetMapping("/edit/{id}")
     public String edit(Model model, @PathVariable("id") Integer id) {
         try {
@@ -84,27 +107,40 @@ public class CourseController {
     }
 
     @PostMapping("saveedit")
-    public String saveEdit(Model model, @ModelAttribute("country") Course course ) {
+    public String saveEdit(Model model, @ModelAttribute("course") Course course, RedirectAttributes objRedir,
+                           BindingResult result ) throws ParseException {
+        if (result.hasErrors()) {
+            return "course/update";
+        }
+        List<Teacher> teachers = teacherService.listTeacher();
+        model.addAttribute("teachers",teachers);
         try {
             Course courseSaved = courseService.update(course);
             model.addAttribute("course", courseSaved);
+            if (courseSaved == null) {
+                objRedir.addFlashAttribute("mensaje", "Ocurrio un error");
+            }
         } catch (Exception e) {
-
+            return "course/update";
         }
         return "redirect:/course/list";
     }
 
-    @GetMapping("/del/{id}")
-    public String delete (Model model,@PathVariable("id") Integer id) {
+    @RequestMapping("/delete")
+    public String deleteCourse(Map<String, Object> model, Course course, @RequestParam(value = "id") Integer id) {
         try {
-            if(courseService.existsById(id)) {
-                courseService.deleteById(id);
+            if (id != null && id > 0) {
+                courseService.deleteCourse(id);
+                model.put("listCourse", courseService.listCourse());
+                model.put("success", "Se eliminó el curso con éxito");
             }
-
-        }catch(	Exception e) {}
-
+        } catch (Exception ex) {
+            model.put("mensaje", "El curso no se puede eliminar, un alumno está inscrito");
+            model.put("listCourse", courseService.listCourse());
+        }
         return "course/list";
     }
+
 
     @RequestMapping("/search")
     public String buscar(Map<String, Object> model, @ModelAttribute Course course)

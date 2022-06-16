@@ -33,7 +33,26 @@ public class CourseServiceImpl implements iCourseService {
 		return rCourse.searchByName(nameCourse.toLowerCase());
 	}
 
-	
+	@Override
+	@Transactional
+	public boolean createCourse(Course course) {
+		Course objCourse = rCourse.save(course);
+		if (objCourse == null) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	@Override
+	public Course findById(int idCourse) {
+		Course course = rCourse.findById(idCourse).get();
+		return course;
+	}
+	@Override
+		public void deleteCourse(int idCourse) {
+		rCourse.deleteById(idCourse);
+	}
 
 	@Override
 	@Transactional(readOnly = true)

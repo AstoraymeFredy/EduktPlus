@@ -88,11 +88,24 @@ public class RegistrationController {
 
 	@RequestMapping("/buscarcursos")
 	public String buscarcursos(Map<String, Object> model, @ModelAttribute Course course) throws ParseException {
-		List<Course> listCourse = cService.searchCourse(course.getName());
-
-		if (listCourse.isEmpty())  model.put("vacio", 2);
+		List<Course> listCourseSaerch = cService.searchCourse(course.getName());
+	
+		 List<Registration> listRegistration = rService.listByStudent(sesion.getStudent().getId_student());
 		
-		model.put("listCourse", listCourse);
+		 for (int i = 0; i < listRegistration.size(); i++) {
+			 for (int j = 0; j < listCourseSaerch.size(); j++) {
+				 if(listRegistration.get(i).getCourse().getId_course() == listCourseSaerch.get(j).getId_course()) {
+					 for (int n = 0; n < listCourseSaerch.size(); n++) {
+						if(listCourseSaerch.get(n).getId_course() ==listCourseSaerch.get(j).getId_course()) { listCourseSaerch.remove(n); break;}
+					 }					 
+					 break;
+				 }				 
+			 }  
+		 }
+		 
+		if (listCourseSaerch.isEmpty())  model.put("vacio", 2);
+		
+		model.put("listCourse", listCourseSaerch);
 		return "registration/listSelectCourse";
 	}
 
@@ -118,7 +131,7 @@ public class RegistrationController {
 			if(listcompare.get(i).getCourse().getId_course() ==course.getId_course()) count++;
 		}
 		
-		if(count < 10) {
+		if(count < 6) {
 			registration.setCourse(course);
 			registration.setDate_register(new Date());
 			registration.setEnabled(true);
@@ -133,7 +146,7 @@ public class RegistrationController {
 					return "registration/listMyCourses";
 			
 		}		
-		else if(count >= 10) {
+		else if(count >= 6) {
 			 List<Course> listCourse =  cService.listCourse();
 			 List<Registration> listRegistration =  rService.listByStudent(sesion.getStudent().getId_student());;
 			

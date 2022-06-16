@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.model.Student;
 import pe.edu.upc.model.Teacher;
 import pe.edu.upc.service.iTeacherService;
 
@@ -39,27 +40,56 @@ public class TeacherController {
         try {
             model.addAttribute("teacher", new Teacher());
         } catch (Exception e) {
+            // TODO: handle exception
         }
         return "teacher/register";
     }
 
-    @PostMapping("saveNew")
-    public String saveNew(Model model, @Valid @ModelAttribute("teacher") Teacher teacher,
-                          BindingResult result) {
-        if(result.hasErrors()) {  }
+    @RequestMapping("/saveNew")
+    public String register(@Valid @ModelAttribute Teacher objTeacher, BindingResult binRes, Model model)
+            throws ParseException {
 
-        try {
-           Teacher teacherSaved = teacherService.create(teacher);
-            model.addAttribute("teacher", teacherSaved);
+        if (binRes.hasErrors()) {
+            int id = objTeacher.getId_teacher();
+            if(id != 0) {
+                model.addAttribute("mensaje", "Ocurrio un error");
+                return "teacher/update";
+            } else {
+                model.addAttribute("mensaje", "Ocurrio un error");
+                return "teacher/register";
+            }
 
-        } catch (Exception e) {
+        } else {
+                boolean flag = true;
 
+            if (flag) {
+                try {
+                    flag =  teacherService.createTeacher(objTeacher);
+                } catch (Exception e) {
+                    model.addAttribute("mensaje", "El DNI ya existe");
+                    return "teacher/register";
+                }
+            }
+
+            if(flag) {
+                    model.addAttribute("success","Registro exitoso");
+                    model.addAttribute("listTeacher", teacherService.listTeacher());
+                    model.addAttribute("teacher", new Teacher());
+                    return "teacher/list";
+                }
+                int id = objTeacher.getId_teacher();
+                if(id != 0) {
+                    model.addAttribute("mensaje", "Ocurrio un error");
+                    return "redirect:/teacher/update";
+                } else {
+                    model.addAttribute("mensaje", "Ocurrio un error");
+                    return "redirect:/teacher/register";
+                }
         }
-        return "redirect:/teacher/list";
     }
 
     @GetMapping("/edit/{id}")
-    public String editTeacher(Model model, @PathVariable("id") Integer id) {
+    public String edit(Model model, @PathVariable("id") Integer id) {
         try {
             if(teacherService.existsById(id)) {
                 Optional<Teacher> optional = teacherService.findById(id);
@@ -74,27 +104,35 @@ public class TeacherController {
     }
 
     @PostMapping("saveedit")
-    public String saveEdit(Model model, @ModelAttribute("teacher") Teacher teacher ) {
+    public String saveEdit(Model model, @ModelAttribute("teacher") Teacher teacher,
+                           BindingResult result )throws ParseException {
         try {
-            Teacher teacherSaved = teacherService.update(teacher);
-            model.addAttribute("teacher", teacherSaved);
-        } catch (Exception e) {
+                    Teacher teacherSaved = teacherService.update(teacher);
+                    model.addAttribute("teacher", teacherSaved);
+            } catch (Exception e) {
+                result.getFieldErrors();
+                return "teacher/update";
 
-        }
-        return "redirect:/teacher/list";
-    }
-
-    @GetMapping("/del/{id}")
-    public String deleteTeacher (Model model,@PathVariable("id") Integer id) {
-        try {
-            if(teacherService.existsById(id)) {
-                teacherService.deleteById(id);
             }
+            return "redirect:/teacher/list";
 
-        }catch(	Exception e) {}
 
-        return "redirect:/teacher/list";
     }
+    @RequestMapping("/delete")
+    public String deleteTeacher(Map<String, Object> model, Teacher teacher, @RequestParam(value = "id") Integer id) {
+        try {
+            if (id != null && id > 0) {
+                teacherService.deleteTeacher(id);
+                model.put("listTeacher", teacherService.listTeacher());
+                model.put("success", "Se eliminó el docente con éxito");
+            }
+        } catch (Exception ex) {
+            model.put("mensaje", "El docente no se puede eliminar porque está asignado a un curso");
+            model.put("listTeacher", teacherService.listTeacher());
+        }
+        return "teacher/list";
+    }
+
 
     @RequestMapping("/search")
     public String buscar(Map<String, Object> model, @ModelAttribute Teacher teacher)

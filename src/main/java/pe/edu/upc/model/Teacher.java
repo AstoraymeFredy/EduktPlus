@@ -43,7 +43,7 @@ public class Teacher implements Serializable {
 	@Size(min = 8, max = 8, message = "El DNI debe tener 8 dígitos")
 	@Pattern(regexp = "[0-9]+", message = "El DNI debe contener solo números")
 	@NotEmpty(message = "Ingrese su DNI")
-	@Column(name="DNI", nullable=false, length=8)
+	@Column(name="DNI", nullable=false, length=8, unique = true)
 	private String dni;
 	
 	@Size(min = 9, max = 9, message = "El celular de tener 9 digitos")
