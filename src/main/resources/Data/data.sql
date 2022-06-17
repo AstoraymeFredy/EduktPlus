@@ -20,14 +20,14 @@ INSERT INTO estudiante ( fecha, dni, email, apellidos, nombre, id_usuario) VALUE
 INSERT INTO estudiante ( fecha, dni, email, apellidos, nombre, id_usuario) VALUES ('2000-09-07', '32165487', 'bart@gmail.com', 'simpson', 'bart', 6);
 INSERT INTO estudiante ( fecha, dni, email, apellidos, nombre, id_usuario) VALUES ('2001-12-07', '12346555', 'lisa@gmail.com', 'simpson', 'lisa', 7);
 INSERT INTO estudiante ( fecha, dni, email, apellidos, nombre, id_usuario) VALUES ('2000-08-21', '87564123', 'luisa.gallego@gmail.com', 'Gallego Basteri', 'Luisa', 8);
-INSERT INTO estudiante ( fecha, dni, email, apellidos, nombre, id_usuario) VALUES ('2000-08-23', '87564120', 'terry.kang@gmail.com', 'Kang Luca', 'Terry', 9);
+INSERT INTO estudiante ( fecha, dni, email, apellidos, nombre, id_usuario) VALUES ('2000-08-23', '87564123', 'terry.kang@gmail.com', 'Kang Luca', 'Terry', 9);
 
 INSERT INTO docente ( fecha, dni, email, apellidos, nombre, celular) VALUES ('1985-03-20', '70365678', 'profesor1.edukate@gmail.com', 'Perez Astorayme', 'Juan', '985645852');
 INSERT INTO docente ( fecha, dni, email, apellidos, nombre, celular) VALUES ('1993-12-21', '70322678', 'profesor2.edukate@gmail.com', 'Torres Choi', 'Subin', '98234552');
 INSERT INTO docente ( fecha, dni, email, apellidos, nombre, celular) VALUES ('1992-02-22', '71234638', 'profesor3.edukate@gmail.com', 'Picapiedra Astetik', 'Pedro', '912045462');
-INSERT INTO docente ( fecha, dni, email, apellidos, nombre, celular) VALUES ('1994-10-20', '70365670', 'profesor4.edukate@gmail.com', 'Reyes Morales', 'Oscar', '985645852');
-INSERT INTO docente ( fecha, dni, email, apellidos, nombre, celular) VALUES ('1990-04-21', '70322670', 'profesor5.edukate@gmail.com', 'Mendoza Barreda', 'Armando', '98234552');
-INSERT INTO docente ( fecha, dni, email, apellidos, nombre, celular) VALUES ('1989-08-22', '71234630', 'profesor6.edukate@gmail.com', 'Calderon Gutierrez', 'Mario', '912045462');
+INSERT INTO docente ( fecha, dni, email, apellidos, nombre, celular) VALUES ('1994-10-20', '70365678', 'profesor4.edukate@gmail.com', 'Reyes Morales', 'Oscar', '985645852');
+INSERT INTO docente ( fecha, dni, email, apellidos, nombre, celular) VALUES ('1990-04-21', '70322678', 'profesor5.edukate@gmail.com', 'Mendoza Barreda', 'Armando', '98234552');
+INSERT INTO docente ( fecha, dni, email, apellidos, nombre, celular) VALUES ('1989-08-22', '71234638', 'profesor6.edukate@gmail.com', 'Calderon Gutierrez', 'Mario', '912045462');
 
 INSERT INTO curso ( descripción, nombre, precio, id_teacher) VALUES ('Con este curso de Excel avanzado, aprenderás cuáles son los aspectos y funcionalidades más complejas.', 'Excel Avanzado', 170, 1);
 INSERT INTO curso ( descripción, nombre, precio, id_teacher) VALUES ('Con este curso de PowerPoint avanzado, aprenderás a realizar presetaciones avanzadas empleando nuevas herramientas.', 'PowerPoint Avanzado', 170, 2);

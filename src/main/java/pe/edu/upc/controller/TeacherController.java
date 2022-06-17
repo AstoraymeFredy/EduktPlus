@@ -127,7 +127,7 @@ public class TeacherController {
                 model.put("success", "Se eliminó el docente con éxito");
             }
         } catch (Exception ex) {
-            model.put("mensaje", "El docente no se puede eliminar porque está asignado a un curso");
+            model.put("mensaje", "No se a podido eliminar al docente, tiene un curso en progreso");
             model.put("listTeacher", teacherService.listTeacher());
         }
         return "teacher/list";
