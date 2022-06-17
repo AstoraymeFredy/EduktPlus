@@ -23,8 +23,8 @@ public class Course implements Serializable  {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id_course;
 
+	@Size(max = 80, message = "El nombre debe tener máximo 80 caracteres")
 	@NotEmpty(message = "Ingrese un nombre para el curso")
-	@Pattern(regexp = "[^0-9]*", message = "El nombre no debe contener números")
 	@Column(name="nombre", nullable=false, length=80)
 	private String name;
 
