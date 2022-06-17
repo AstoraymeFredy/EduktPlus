@@ -35,6 +35,7 @@ public class Course implements Serializable  {
 
 	@NotNull(message = "Ingrese un precio")
 	@Min(value = 1, message = "Ingrese un precio mayor a 0")
+	@Max(value = 100000, message = "El precio debe ser menor a 100000.00")
 	@Column(name="precio", nullable=false)
 	private BigDecimal price;
 
