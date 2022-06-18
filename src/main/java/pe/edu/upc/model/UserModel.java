@@ -19,10 +19,11 @@ public class UserModel implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id_user;
 	
-	@Size(min = 1, max = 25, message = "El usuario debe tener máximo 25 caracteres")
+	@Size(min = 5, max = 25, message = "El usuario debe tener mínimo 5 y máximo 25 caracteres")
 	@Column(name="username", nullable=false, length=25, unique = true)
 	private String username;
 	
+	@Size(min = 5, message = "La contraseña debe tener mínimo 5 y máximo 25 caracteres")
 	@Column(name="password", nullable=false)
 	private String password;
 

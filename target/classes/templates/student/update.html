@@ -139,6 +139,9 @@
 													th:field="*{user.username}"
 													placeholder="Ingresa el nombre de usuario" id="username"
 													required="required">
+												<small class="form-text text-danger"
+													th:if="${#fields.hasErrors('user.username')}"
+													th:errors="*{username}"></small>
 											</div>
 
 										</div>
