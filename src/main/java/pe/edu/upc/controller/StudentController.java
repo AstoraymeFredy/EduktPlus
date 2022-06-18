@@ -94,6 +94,12 @@ public class StudentController {
 			try {
 				flag = uService.createUser(user);
 			} catch (Exception e) {
+				System.out.println(e.getLocalizedMessage());
+				System.out.println(e.getMessage());
+				System.out.println(e.getCause());
+				System.out.println(e.getSuppressed());
+				System.out.println(e.getStackTrace());
+				System.out.println(objStudent.getUser().getId_user());
 				model.addAttribute("mensaje", "El usuario ya existe");
 				return "student/register";
 			}
@@ -134,10 +140,11 @@ public class StudentController {
 				Student studendg = sService.findById(id);
 				sService.deleteStudent(id);
 				uService.deleteUser(studendg.getUser().getId_user());
+				model.put("mensaje2", "El estudiante eliminado correctamente");
 				model.put("listStudent", sService.listStudent());
 			}
 		} catch (Exception ex) {
-			model.put("mensaje", "El estudiante no se puede eliminar, está matriculado en un curso");
+			model.put("mensaje1", "El estudiante no se puede eliminar, está matriculado en un curso");
 			model.put("listStudent", sService.listStudent());
 		}
 		return "student/list";
