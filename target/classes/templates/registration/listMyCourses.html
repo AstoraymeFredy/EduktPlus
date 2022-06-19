@@ -61,7 +61,11 @@
 							<div class="alert alert-info" th:if="${inf != null}"
 								th:text="${inf}"></div>
 						</div>
-				
+						
+				<div class="col-sm-12 mt-4">
+							<div class="alert  alert-danger" th:if="${mensaje != null}"
+								th:text="${mensaje}"></div>
+						</div>
 
 					<div class="row mt-5">
 
@@ -91,7 +95,7 @@
 							<p class="text-center fs-5">No tienes cursos matriculados</p>
 						</div>
 						<div th:if="${vacio ==2}">
-							<p class="text-center fs-5">No hay registros</p>
+							<p class="text-center fs-5">No hay registros relacionados</p>
 						</div>
 					</div>
 				</div>

@@ -1,10 +1,14 @@
 package pe.edu.upc.controller;
 
 import java.text.ParseException;
+import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.time.LocalDate;
+import java.time.ZoneId;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -71,13 +75,35 @@ public class RegistrationController {
 			@RequestParam(value = "id") Integer id) {
 		try {
 			if (id != null && id > 0) {
-				rService.deleteRegistration(id);
-				List<Registration> listInscription = rService.listByStudent(sesion.getStudent().getId_student());
-				model.put("listInscription", listInscription);
-				if (listInscription.isEmpty()) model.put("vacio", 1);
-				model.put("course", new Course());
-				model.put("inf", "Retiro exitoso");
-				return "registration/listMyCourses";
+				
+				Registration r = rService.searchById(id);
+				Calendar date = r.getDate_register();
+				Calendar today = Calendar.getInstance();
+		
+			     LocalDate hoy = today.getTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			     LocalDate despues = date.getTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+				long limit = ChronoUnit.DAYS.between(despues,hoy);
+				
+				if(limit >7) {
+					List<Registration> listInscription = rService.listByStudent(sesion.getStudent().getId_student());
+					model.put("listInscription", listInscription);
+					if (listInscription.isEmpty()) model.put("vacio", 1);
+					model.put("course", new Course());
+					model.put("mensaje", "Límite de tiempo excedido(7 dias) para retiro");
+					return "registration/listMyCourses";
+				}
+				else {
+					rService.deleteRegistration(id);
+					
+					
+					List<Registration> listInscription = rService.listByStudent(sesion.getStudent().getId_student());
+					model.put("listInscription", listInscription);
+					if (listInscription.isEmpty()) model.put("vacio", 1);
+					model.put("course", new Course());
+					model.put("inf", "Retiro exitoso");
+					return "registration/listMyCourses";
+				}
+				
 			}
 		} catch (Exception ex) {
 			model.put("mensaje", "El curso en la matricula no se puede elminar");
@@ -132,8 +158,9 @@ public class RegistrationController {
 		}
 		
 		if(count < 6) {
+			Calendar today = Calendar.getInstance();
 			registration.setCourse(course);
-			registration.setDate_register(new Date());
+			registration.setDate_register(today);
 			registration.setEnabled(true);
 			registration.setStudent(sesion.getStudent());
 			
@@ -163,7 +190,7 @@ public class RegistrationController {
 			 
 			if (listCourse.isEmpty())  model.addAttribute("vacio", 2);
 			model.addAttribute("listCourse",listCourse);
-			model.addAttribute("error", "Error: El curso ya esta lleno.");
+			model.addAttribute("error", "El curso tiene el máximo de estudiantes");
 			model.addAttribute("course", new Course());
 			return "registration/listSelectCourse";
 		}
