@@ -1,1 +1,0 @@
-web:java -Dserver.port=$PORT -jar target/FarmaApp-1.0.war
