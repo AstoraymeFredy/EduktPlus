@@ -40,6 +40,12 @@ public class RegistrationServiceImpl implements iRegistrationService {
 	public List<Registration> searchInscription(int idStudent, String nameCourse){
 		return rRegistration.searchInscription( idStudent,nameCourse.toLowerCase());
 	}
+	
+	@Override
+	public Registration searchById(int id){
+		return rRegistration.searchById( id);
+	}
+
 
 	@Override
 	@Transactional

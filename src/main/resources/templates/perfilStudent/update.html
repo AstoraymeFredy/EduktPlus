@@ -37,6 +37,10 @@
 							</div>
 						</div>
 					</div>
+					<div class="alert alert-danger" th:if="${inf != null}"
+								th:text="${inf}"></div>
+									
+					
 					<div class="row mb-4">
 						<div class="col-xl-3 col-lg-4 col-md-12 col-12">
 							<div class="mb-4 mb-lg-0">
@@ -44,6 +48,10 @@
 									perfil</p>
 							</div>
 						</div>
+			
+							
+					
+						
 						<div class="col-xl-9 col-lg-8 col-md-12 col-12">
 							<!-- card -->
 							<div class="card rounded-3">
@@ -54,9 +62,7 @@
 										<!-- row -->
 
 										<input id="usuario" placeholder="Ingrese su nombre"
-											th:field="*{id_student}" Type="hidden" /> <input
-											id="usuario" placeholder="Ingrese su nombre"
-											th:field="*{user.id_user}" Type="hidden" />
+											th:field="*{id_student}" Type="hidden" /> 
 
 										<div class="mb-4 row">
 
@@ -135,9 +141,23 @@
 	                                            form-label">Usuario</label>
 											<div class="col-md-8 col-12">
 												<input id="password" class="form-control"
-													th:field="*{user.username}" placeholder="Dato oculto"
-													type="text" readonly>
+													th:field="*{user.username}" placeholder="Ingresa el nombre de usuario"
+													type="text" 	required="required" >
 											</div>
+
+
+											<div class="mb-4 row">
+
+												<div class="col-md-8 col-12">
+													<input id="password" class="form-control"
+														th:field="*{user.password}" placeholder="Dato oculto"
+														type="hidden"> <input id="password"
+														class="form-control" th:field="*{user.id_user}"
+														placeholder="Dato oculto" type="hidden">
+												</div>
+
+											</div>
+
 
 										</div>
 										<div class="mt-2">
