@@ -192,10 +192,39 @@ public class StudentController {
 	@RequestMapping("/editStudent")
 	public String editClient(@Valid @ModelAttribute(value = "student") Student objStudent, BindingResult binRes,
 			Model model, HttpSession httpSession) throws ParseException {
+				
 		if (binRes.hasErrors()) {
 			return "perfilStudent/update";
+
 		} else {
-			boolean flag = sService.updateStudent(objStudent);
+			UserModel user = objStudent.getUser();
+			user.setUsername(user.getUsername().trim());
+			user.setPassword(user.getPassword().trim());
+			Calendar birth_date = objStudent.getBirth_date();
+			Calendar today = Calendar.getInstance();
+			int age = today.get(1) - birth_date.get(1);
+			if (age < 14) {
+				
+				model.addAttribute("inf", "La edad mínima es 14");
+				model.addAttribute("student", sesion.getStudent());
+				return "perfilStudent/update";
+			}
+
+			boolean flag = true;
+			try {
+				flag = uService.createUser(user);
+			} catch (Exception e) {
+				if (user.getUsername().length() > 25 || user.getUsername().length() < 5) {
+					model.addAttribute("inf", "El usuario debe tener mínimo 5 y máximo 25 caracteres");
+				} else {
+					model.addAttribute("inf", "El usuario ya existe");
+				}
+				
+				model.addAttribute("student", sesion.getStudent());
+				return "perfilStudent/update";
+			}
+			
+			sService.updateStudent(objStudent);
 			if (flag) {
 				httpSession.setAttribute("nameUser", objStudent.getName() + " " + objStudent.getLastname());
 				sesion.setStudent(objStudent);
@@ -203,8 +232,14 @@ public class StudentController {
 				model.addAttribute("student", sesion.getStudent());
 				return "perfilStudent/view";
 			} else {
+			
 				return "redirect:/student/edit";
 			}
+				
+			
+
 		}
+		
+		
 	}
 }

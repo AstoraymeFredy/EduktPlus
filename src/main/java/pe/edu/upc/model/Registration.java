@@ -1,7 +1,7 @@
 package pe.edu.upc.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,7 +41,7 @@ public class Registration implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@Column(name="fecha_registro")
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date date_register;
+	private Calendar date_register;
 	
 	@Column(name="enabled", nullable=false)
 	private Boolean enabled;
@@ -53,7 +53,7 @@ public class Registration implements Serializable {
 
 	public Registration(int id_registration, @NotNull(message = "Seleccione curso") Course course,
 			@NotNull(message = "Seleccione estudiante") Student student,
-			@NotNull(message = "Ingrese la fecha") Date date_register, Boolean enabled) {
+			@NotNull(message = "Ingrese la fecha") Calendar date_register, Boolean enabled) {
 		super();
 		this.id_registration = id_registration;
 		this.course = course;
@@ -86,11 +86,11 @@ public class Registration implements Serializable {
 		this.student = student;
 	}
 
-	public Date getDate_register() {
+	public Calendar getDate_register() {
 		return date_register;
 	}
 
-	public void setDate_register(Date date_register) {
+	public void setDate_register(Calendar date_register) {
 		this.date_register = date_register;
 	}
 

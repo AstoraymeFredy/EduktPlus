@@ -20,6 +20,10 @@ public interface iRegistrationRepository extends JpaRepository<Registration, Int
 	@Query("from Registration r where r.student.id_student = :idStudent")
 	List<Registration> findByStudentId(@Param("idStudent") int idStudent);
 	
+	@Query("from Registration r where r.id_registration = :id")
+	Registration searchById(@Param("id") int id);
+	
+	
 	@Query("from Registration r where r.student.id_student = :idStudent and lower(r.course.name) like %:nameCourse%")
 	List<Registration> searchInscription(@Param("idStudent") int idStudent,@Param("nameCourse") String nameCourse );
 	
