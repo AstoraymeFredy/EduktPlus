@@ -53,8 +53,7 @@ public class ReportController {
 				model.put("headerNumber", sRegistration.headerReportNumberByDates(reportSearch.getStart_date(), reportSearch.getEnd_date()));
 				model.put("headerCourse", sRegistration.headerReportCourseByDates(reportSearch.getStart_date(), reportSearch.getEnd_date()));
 				model.put("headerTeacher", sRegistration.headerReportTeacherByDates(reportSearch.getStart_date(), reportSearch.getEnd_date()));
-				model.put("message",
-						"Error: Debes seleccionar correctamente las fechas. La fecha de inicio no puede ser posterior");
+				model.put("message", "La fecha de inicio debe ser anterior a la fecha final");
 			}
 		}
 		return "report/list";
