@@ -18,23 +18,23 @@
 			<!-- ! Main -->
 			<main class="main position-relative d-flex" id="skip-target">
 				<div class="row" style="width: 100%">
-					<div class="col-6 background-image-client"></div>
-					<div class="col-6">
+					<div class="d-none d-md-block col-md-4 col-lg-6 background-image-client"></div>
+					<div class="col-12 col-md-8 col-lg-6">
 						<div class="d-flex justify-content-center align-items-center"
 							style="height: 100vh">
-							<div class="container w-50 p-3">
+							<div class="container w-75 p-0 p-lg-5">
 								<div class="mt-5">
 									<h4 class="principal-title text-dark fs-2 ">Iniciar Sesion</h4>
 								</div>
 								<div class="">
 									<form th:action="@{/login}" method="post">
 										<div class="row mb-2">
-											<div class="row">
+											<div class="col-12">
 												<label for="usuario"
 													class="col-sm-12 col-form-label
 	                                            form-label">Usuario*</label>
 											</div>
-											<div class="row">
+											<div class="col-12">
 												<div class="col-sm-12 mb-2 mb-lg-0">
 													<input id="username" name="username" class="form-control"
 														required="required" placeholder="Ingrese su usuario"
@@ -43,13 +43,13 @@
 											</div>
 										</div>
 										<div class="row mb-4">
-											<div class="row">
+											<div class="col-12">
 												<label for="password"
 													class="col-sm-12 col-form-label
 	                                            form-label">Contraseña*</label>
 
 											</div>
-											<div class="row">
+											<div class="col-12">
 												<div class="col-sm-12 mb-2 mb-lg-0">
 													<input name="password" id="password" class="form-control"
 														required="required" placeholder="Ingrese su contraseña"
@@ -58,7 +58,7 @@
 											</div>
 										</div>
 										<div class="row">
-											<div class="row">
+											<div class="col-12">
 												<div class="col-sm-12 mb-2 mb-lg-0">
 													<button type="submit"
 														class="btn btn-primary form-control px-4">

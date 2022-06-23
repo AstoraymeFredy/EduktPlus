@@ -42,8 +42,12 @@ body {
 
 .background-image-client{
  	background: url('../img/back1.png'); 
+    background-position: center center;
+    background-repeat: no-repeat; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
-    min-height:100vh;
  }
 
 .w-65 {
